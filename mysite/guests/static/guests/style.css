@@ -1,0 +1,99 @@
+header {
+    background-color: #7294ad;
+    width: 100%;
+    opacity: .9;
+    margin-bottom: 10px;
+  }
+
+  header h1.logo {
+    margin: 0;
+    font-family: Snell Roundhand, cursive;
+    font-size: 1.7em;
+    color: #fff;
+    text-transform: uppercase;
+    position: relative;
+    text-align:center;
+  }
+
+  header h1.logo:hover {
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .navbar {
+    text-align:center;
+  }
+  .navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: inline-block;
+  }
+  
+  .navbar li {
+    float: left;
+  }
+  
+  .navbar li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  .navbar li a:hover {
+    background-color: #111;
+  }
+  
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .divLeft {
+    width: 45%; float:left; margin:10px
+}
+.divRight {
+    width: 45%; float:left; margin:10px
+}
+
+  ul.errorlist {
+    margin: 0;
+    padding: 0;
+}
+.errorlist li {
+    border: 1px solid red;
+    color: red;
+    background: rgba(255, 0, 0, 0.15);
+    list-style-position: inside;
+    display: block;
+    font-size: 1.2em;
+    margin: 0 0 3px;
+    padding: 4px 5px;
+    text-align: center;    
+    border-radius: 3px;
+}
+input, textarea {
+    width: 100%;
+    padding: 5px!important;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box; 
+    border-radius: 3px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(169,169,169)
+}
+input {	
+    height: 30px;
+}
+.success {
+    background-color: rgba(0, 128, 0, 0.15);
+    padding: 10px;
+    text-align: center;
+    color: green;
+    border: 1px solid green;
+    border-radius: 3px;
+}

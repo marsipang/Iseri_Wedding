@@ -1,0 +1,29 @@
+{% extends "guests/layout.html" %}
+{% block content %}
+    <div >
+            <div class="divLeft">
+                    <img src="../static/guests/images/WeddingPhoto.jpg">
+            </div>
+        <div class="divRight">
+                <h1>Find Your Invitation</h1>
+                
+                {% if submitted %}
+                    <p class="success">
+                        {{ result }}
+                    </p>
+                
+                {% else %}
+                    <form action="" method="post" novalidate>
+                    <table>
+                        {{ form }}
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td><input type="submit" value="Search"></td>
+                        </tr>
+                    </table>
+                    {% csrf_token %}
+                    </form>
+                {% endif %}
+        </div>
+    </div>
+{% endblock %}

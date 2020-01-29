@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+        <title>Elizabeth & Ellison</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'guests/style.css' %}">
+    </head>
+    <header>
+        <h1 class="logo">Elizabeth & Ellison</h1>
+        <div class="navbar">
+            <ul>
+            <li><a href="{% url 'guests:test' %}">Home</a></li>
+            <li><a href="{% url 'guests:rsvp' %}">RSVP</a></li>
+            <li><a href="{% url 'guests:test' %}">Registry</a></li>
+          </ul>
+        </div>
+    </header>
+    <body>
+        {% block content %}
+        {% endblock %}
+    </body>
+</html>
