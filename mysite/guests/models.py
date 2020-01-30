@@ -4,8 +4,7 @@ from django.db import models
 class Guest(models.Model):
     FirstName = models.TextField()
     LastName = models.TextField()
-    AddressLine1 = models.TextField()
-    AddressLine2 = models.TextField(blank=True, null=True)
+    Address = models.TextField()
     City = models.TextField()
     State = models.TextField()
     ZipCode = models.TextField()
