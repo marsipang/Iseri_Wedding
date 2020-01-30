@@ -52,12 +52,30 @@ def ChooseRSVP(request, SearchResult):
         form = RSVPForForm(SearchResult, request.POST)
         if form.is_valid():
             cd = form.cleaned_data
-#            title = cd['Invitees']
-#            Guest.objects.filter(GuestID__in=id_list).update(myattribute=True)
-            return HttpResponseRedirect(reverse('guests:test'))
-            
+            id_list = cd['Invitees']
+            user = Guest.objects.get(GuestID=guestid)
+            useremail = user.Email
+            username = user.FirstName + ' ' + user.LastName
+            rsvpid = 'temprsvpid'
+            Guest.objects.filter(GuestID__in=id_list).update(Email=useremail, RSVPID=rsvpid, UpdateBy=username)
+            return HttpResponseRedirect(reverse('guests:submitrsvp', args=(rsvpid,)))
+        else:
+            next
+    else:
+        next
     return render(request, 'guests/rsvp.html', {'form': form, 'title': title})
 
+def SubmitRSVP(request, ChooseResult):
+    #make repeating form with
+    #RSVP Choice
+    #Plus One if Applicable
+    #Email (filledout already? and can replace with another email)
+    #Address (filledout already and replace?)
+    
+    title = 'dummy'
+    form = RSVPForForm(ChooseResult)
+    
+    return render(request, 'guests/rsvp.html', {'form': form, 'title': title})
 
 
 def registry(request):

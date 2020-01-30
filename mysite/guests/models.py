@@ -12,6 +12,8 @@ class Guest(models.Model):
     Attending = models.BooleanField(blank=True, null=True)
     InvitationID = models.TextField(blank=True, null=True)
     GuestID = models.IntegerField(blank=True, null=True)
+    RSVPID = models.TextField(blank=True, null=True)
+    UpdateBy = models.TextField(blank=True, null=True)
     
     def __str__(self):
         return self.FirstName
