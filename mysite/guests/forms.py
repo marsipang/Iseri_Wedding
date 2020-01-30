@@ -6,16 +6,15 @@ class SearchForm(forms.Form):
     LastName = forms.CharField(label = 'Last Name', widget=forms.Textarea(attrs={'rows':1, 'cols':50}))
     Email = forms.EmailField(label = 'Email Address')
 
+class DynamicMultipleChoiceField(forms.MultipleChoiceField): 
+    def clean(self, value): 
+        return value
+
 class RSVPForForm(forms.Form):
-    Attending = forms.MultipleChoiceField(label = 'attend', widget=forms.CheckboxSelectMultiple, choices = [])
-    Email = forms.EmailField(label = 'Email Address')
-
-
+    Invitees = DynamicMultipleChoiceField(label='', widget=forms.CheckboxSelectMultiple, choices=[])
     def __init__(self, InvitationID, *args, **kwargs):
-        super(RSVPForm, self).__init__(*args, **kwargs)
-        self.fields['Attending'] = forms.MultipleChoiceField(label = 'attend', widget=forms.CheckboxSelectMultiple,
-            choices=[(o.FirstName + ' ' + o.LastName, o.FirstName + ' ' + o.LastName) for o in Guest.objects.all().filter(InvitationID=InvitationID)]
-        )
+        self.request = kwargs.pop('request', None)
         
+        super(RSVPForForm, self).__init__(*args, **kwargs)
+        self.fields['Invitees'].choices = [(o.GuestID, o.FirstName + ' ' + o.LastName) for o in Guest.objects.all().filter(InvitationID=InvitationID)]
         
-    

@@ -11,6 +11,7 @@ class Guest(models.Model):
     Email = models.EmailField(blank=True, null=True)
     Attending = models.BooleanField(blank=True, null=True)
     InvitationID = models.TextField(blank=True, null=True)
+    GuestID = models.IntegerField(blank=True, null=True)
     
     def __str__(self):
         return self.FirstName

@@ -1,40 +1,23 @@
 {% extends "guests/layout.html" %}
+{% load static %}
 {% block content %}
     <div >
-            <div class="divLeft">
-                    <img src="../static/guests/images/WeddingPhoto.jpg">
-            </div>
+        <div class="divLeft">
+                <img src="{% static 'guests/images/WeddingPhoto.jpg' %}">
+        </div>
         <div class="divRight">                
-                {% if submitted %}
-                    <h1>RSVP</h1>
-                    <p class="success">
-                        {{ result }}
-                    </p>
-                    <form action = "" method = "post" novalidate>
-                        <table>
-                            {{ rsvpforform }}
-                            <tr>
-                                    <td>&nbsp;</td>
-                                    <td><input type="submit" name="rsvp" value="Submit"></td>
-                                </tr>
-                        </table>
-                        {% csrf_token %}
-                    </form>
-                
-                {% else %}
-                    <h1>Find Your Invitation</h1>
-                    <div class="message"></div>
-                    <form id="search" action="" method="post">
-                        <table>
-                            {{ form.as_p }}
-                            <tr>
-                                <td>&nbsp;</td>
-                                <td><input type="submit" name="search" value="Search"></td>
-                            </tr>
-                        </table>
-                    {% csrf_token %}
-                    </form>
-                {% endif %}
+            <h1>{{ title }}</h1>
+            <div class="message"></div>
+            <form id="search" action="" method="post">
+                <table>
+                    {{ form.as_p }}
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td><input type="submit" name="search" value="Search"></td>
+                    </tr>
+                </table>
+            {% csrf_token %}
+            </form>
         </div>
     </div>
 {% endblock %}
@@ -42,15 +25,13 @@
 {% block javascript %}
 <script type="text/javascript" >
     $('#search').submit(function(e){
+        var fname = $("#id_FirstName").val();
         var lname = $("#id_LastName").val();
-        console.log(lname);
-        var addr = $("#id_Address").val();
-        console.log(addr);
         $.ajax({
             url: 'ajax/validate_guest/',
             data: {
+                'fname': fname,
                 'lname': lname,
-                'addr': addr
             },
             dataType: 'json',
             success: function (data) {
