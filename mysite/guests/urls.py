@@ -12,4 +12,5 @@ urlpatterns = [
     path('ajax/validate_guest/', views.validate_guest, name='validate_guest'),
     path('registry', views.registry, name='registry'),
     path('travel', views.travel, name='travel'),
+    path('weddingparty', views.weddingparty, name='weddingparty')
 ]

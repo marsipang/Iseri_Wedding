@@ -80,3 +80,6 @@ def registry(request):
 
 def travel(request):
     return render(request, 'guests/travel.html')
+
+def weddingparty(request):
+    return render(request, 'guests/weddingparty.html', {'show':'hide'})
