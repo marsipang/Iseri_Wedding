@@ -22,3 +22,9 @@ class Guest(models.Model):
     check_rsvp.admin_order_field = 'Attending'
     check_rsvp.boolean = True
     check_rsvp.short_description = 'Published recently?'
+    
+class WeddingParty(models.Model):
+    FirstName = models.TextField()
+    LastName = models.TextField()
+    Relation = models.TextField()
+    Title = models.TextField()

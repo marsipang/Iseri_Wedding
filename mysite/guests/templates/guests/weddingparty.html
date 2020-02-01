@@ -1,71 +1,70 @@
 {% extends "guests/layout.html" %}
 {% load static %}
 {% block content %}
-    <div class="container" id="slidecenter">
+    <div class="container">
         <div class="homecontainer">
             <img src="{% static 'guests/images/HoldingHandsFramed.png' %}">
         </div>
     </div>
-    {% if show == 'show' %}
-    <div>
-        <div class="slideleft">
+
+    <div class="container">
+        <div class="divLeft" id="partyleft">
             <h1> Bride Tribe </h1>
-            <table class="partytable">
-                <tr>
-                    <td><img class="weddingpartyimg" src="{% static 'guests/images/Lizzie.jpg' %}">
-                    <br>Mr. Andres<br>Father of the Bride</td>
-                    <td><img class="weddingpartyimg" src="{% static 'guests/images/Lizzie.jpg' %}">
-                    <br>Mrs. Andres<br>Mother of the Bride</td>
-                </tr>
-                <tr>
-                    <td><img class="weddingpartyimg" src="{% static 'guests/images/Lizzie.jpg' %}">
-                    <br>Micah Andres<br>Brother of the Bride</td>
-                    <td><img class="weddingpartyimg" src="{% static 'guests/images/Kathleen.jpg' %}">
-                    <br>Kathleen Tanaka<br>Maid of Honor</td>
-                    
-                </tr>
-                <tr>
-                    <td><img class="weddingpartyimg" src="{% static 'guests/images/Marissa.jpg' %}">
-                        <br>Marissa Pang<br>Bridesmaid</td>
-                    <td><img class="weddingpartyimg" src="{% static 'guests/images/Trisha.jpg' %}">
-                    <br>Trisha Okimoto<br>Bridesmaid</td>
-                </tr>
-                <tr>
-                    <td><img class="weddingpartyimg" src="{% static 'guests/images/Lizzie.jpg' %}">
-                    <br>Bridesmaid<br>Bridesmaid</td>
-                    <td><img class="weddingpartyimg" src="{% static 'guests/images/Lizzie.jpg' %}">
-                    <br>Bridesmaid<br>Bridesmaid</td>
-                </tr>
-            </table>
+            {% for person in Bride %}
+                <div class="partyblockcontainer">
+                    <div class="partyimgcontainer" onclick="on()">
+                        <img class="weddingpartyimg" src="{% static 'guests/images/' %}{{ person.FirstName }}.jpg " >
+                        <div class="wedimgoverlay">
+                            <div class="partyimgtext"> 
+                                Click to learn more about me!
+                            </div>
+                        </div>
+                    </div>
+                    {{ person.FirstName }} {{ person.LastName }}
+                    <br>{{ person.Title }}
+                </div>
+            {% endfor %}
         </div>
-        <div class="slideright">
+        <div class="divRight">
             <h1> Groom Platoon </h1>
-            <table>
-                <tr>
-                    <td><img class="weddingpartyimg" src="{% static 'guests/images/El.jpg' %}">
-                    <br>Mr. Andres<br>Father of the Groom</td>
-                    <td><img class="weddingpartyimg" src="{% static 'guests/images/El.jpg' %}">
-                    <br>Mrs. Andres<br>Mother of the Groom</td>
-                </tr>
-                <tr>
-                    <td><img class="weddingpartyimg" src="{% static 'guests/images/El.jpg' %}">
-                    <br>Groomsman<br>Groomsman</td>
-                    <td><img class="weddingpartyimg" src="{% static 'guests/images/El.jpg' %}">
-                    <br>Groomsman<br>Groomsman</td>
-                    
-                </tr>
-                <tr>
-                    <td><img class="weddingpartyimg" src="{% static 'guests/images/El.jpg' %}">
-                        <br>Groomsman<br>Groomsman</td>
-                    <td><img class="weddingpartyimg" src="{% static 'guests/images/El.jpg' %}">
-                    <br>Groomsman<br>Groomsman</td>
-                </tr>
-                <tr>
-                    <td><img class="weddingpartyimg" src="{% static 'guests/images/El.jpg' %}">
-                    <br>Groomsman<br>Groomsman</td>
-                </tr>
-            </table>
+            {% for person in Groom %}
+                <div class="partyblockcontainer">
+                    <div class="partyimgcontainer">
+                        <img class="weddingpartyimg" src="{% static 'guests/images/' %}{{ person.FirstName }}.jpg " >
+                        <div class="wedimgoverlay">
+                            <div class="partyimgtext"> 
+                                Click to learn more about me!
+                            </div>
+                        </div>
+                    </div>
+                    {{ person.FirstName }} {{ person.LastName }}
+                    <br>{{ person.Title }}
+                </div>
+            {% endfor %}
         </div>
-        {% endif %}
     </div>
+    {% for person in Bride %}
+    <div id="overlay" name="Overlay-{{person.FirstName}}" onclick="off()">
+        <div id="overlaycontent">
+            <img class="pageoverlayimg" src="{% static 'guests/images/' %}Lizzie.jpg " >
+            <br>This is just a test blurb to test out length and design and functionality. The real thing will be a 
+            description of the how the bride or groom met their crew/posse member. If they wanted the could also
+            add a few more things about the person. I don't know it's really up to them.
+        </div>
+    </div>
+    {% endfor %}
+
+{% endblock %}
+
+{% block javascript %}
+<script type="text/javascript" >
+    var fname = $("#id_FirstName").val();
+    function on() {
+        document.getElementById("overlay").style.display = "block";
+    }
+
+    function off() {
+        document.getElementById("overlay").style.display = "none";
+    }
+</script>
 {% endblock %}

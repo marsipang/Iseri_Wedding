@@ -92,13 +92,15 @@ h1 {
     opacity: .9;
 }
 
-  .divLeft {
+.divLeft {
     width: 45%; 
+    height: auto; 
     float:left; 
     margin:auto 10px auto 30px;
-    padding:20px;
+    padding:30px;
     text-align: center;
     align-items: center;
+    font-size: 18px;
 }
 
 .divRight {
@@ -145,16 +147,87 @@ h1 {
     height: 250px;
 }
 
-.weddingpartyimg {
-    max-height: 150px;
+.partyblockcontainer {
+    width: 30%;
+    float: right;
+    margin: 8px;
 }
 
-.partytable {
+.partyimgcontainer {
+    position: relative;
     width: 100%;
+    
 }
 
-.partytable td{
-    width:50%;
+.weddingpartyimg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.wedimgoverlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+    background: rgb(0, 0, 0);
+    background: rgba(0, 0, 0, 0.5); /* Black see-through */
+    color: #f1f1f1;
+  }
+
+  .partyimgcontainer:hover .wedimgoverlay {
+    opacity: 1;
+  }
+
+  .partyimgtext {
+    color: white;
+    font-size: 18px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
+.pageoverlayimg {
+    max-width: 300px;
+}
+
+#overlay {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.8);
+    z-index: 2;
+    cursor: pointer;
+  }
+
+  #overlaycontent{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 24px;
+    color: white;
+    transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    text-align: center;
+  }
+
+#partyleft {
+    background-color: #7294ad;
+    opacity: .9;
 }
 
 #slidecenter {
@@ -185,6 +258,12 @@ h1 {
     align-items: center;    
     font-size: 18px;
 }
+
+
+
+
+
+
 
 
 

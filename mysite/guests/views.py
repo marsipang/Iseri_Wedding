@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from .forms import SearchForm, RSVPForForm, RSVPForm
-from .models import Guest
+from .models import Guest, WeddingParty
 from django.db.models.functions import Concat, Lower
 from django.db.models import Count, F, Value
 from django.urls import reverse
@@ -82,4 +82,6 @@ def travel(request):
     return render(request, 'guests/travel.html')
 
 def weddingparty(request):
-    return render(request, 'guests/weddingparty.html', {'show':'hide'})
+    Bride = [{'FirstName':i.FirstName, 'LastName':i.LastName, 'Title':i.Title} for i in WeddingParty.objects.all().filter(Relation='Bride')]
+    Groom = [{'FirstName':i.FirstName, 'LastName':i.LastName, 'Title':i.Title} for i in WeddingParty.objects.all().filter(Relation='Groom')]
+    return render(request, 'guests/weddingparty.html', {'Bride':Bride, 'Groom':Groom})
