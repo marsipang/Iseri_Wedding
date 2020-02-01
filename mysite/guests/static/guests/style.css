@@ -1,26 +1,28 @@
 header {
-    background-color: #7294ad;
+    background-color: white;
     width: 100%;
     opacity: .9;
+    padding-top: 10px;
     margin-bottom: 10px;
+    text-align: center;
   }
 
   header h1.logo {
     margin: 0;
-    font-family: Snell Roundhand, cursive;
     font-size: 1.7em;
-    color: #fff;
+    color: goldenrod;
     text-transform: uppercase;
     position: relative;
     text-align:center;
   }
 
-  header h1.logo:hover {
-    color: #fff;
-    text-decoration: none;
+  #headerimg {
+    margin: 0;
+    max-height:300px;
+    max-width:300px;
   }
-
   .navbar {
+    background-color: white;
     text-align:center;
   }
   .navbar ul {
@@ -37,26 +39,110 @@ header {
   
   .navbar li a {
     display: block;
-    color: white;
+    color:#7294ad;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
   }
   
   .navbar li a:hover {
-    background-color: #111;
+    color: lightsteelblue;
   }
   
+body {
+    color: white;
+    background-image: url('images/Website Background4.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+h1 {
+    display: block;
+    font-size: 2em;
+    margin-top: 0.67em;
+    margin-bottom: 0.67em;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: bold;
+    border-bottom: 1px solid white;
+  }
+
   img {
     max-width: 100%;
     height: auto;
   }
 
-  .divLeft {
-    width: 45%; float:left; margin:10px
+.container {
+    display: inline-flex;  
+    width: 100%;
 }
+
+.singlecenter {
+    width: 100%;
+    margin: auto 100px;
+    padding: 20px;
+    text-align: center;
+    align-items:center;
+    background-color: #7294ad;
+    opacity: .9;
+}
+
+  .divLeft {
+    width: 45%; 
+    float:left; 
+    margin:auto 10px auto 30px;
+    padding:20px;
+    text-align: center;
+    align-items: center;
+}
+
 .divRight {
-    width: 45%; float:left; margin:10px
+    width: 45%;
+    height: auto; 
+    float:left; 
+    margin:auto 30px auto 10px;
+    padding:30px;
+    background-color: #7294ad;
+    opacity: .9;
+    text-align: center;
+    align-items: center;    
+    font-size: 18px;
+}
+
+.homecontainer {
+    width: 100%;
+    margin: auto 100px;
+    padding: 20px;
+    text-align: center;
+    align-items:center;
+}
+
+#instaicon {
+    width: 20px;
+    height: 20px;
+}
+
+.icon {
+    width: 40px;
+    height: 40px;
+}
+
+.regtable {
+    width: 100%;
+}
+
+.regtable td{
+    width:50%;
+}
+
+.regimg {
+    width: 300px;
+    height: 300px;
 }
 
   ul.errorlist {

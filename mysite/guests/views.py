@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
-from .forms import SearchForm, RSVPForForm
+from .forms import SearchForm, RSVPForForm, RSVPForm
 from .models import Guest
 from django.db.models.functions import Concat, Lower
 from django.db.models import Count, F, Value
@@ -8,8 +8,11 @@ from django.urls import reverse
 import re
 
 # Create your views here.
-def test(request):
-    return render(request, 'guests/test.html')
+def home(request):
+    return render(request, 'guests/home.html')
+
+def details(request):
+    return render(request, 'guests/details.html')
 
 def FindRSVP(request): 
     title = 'Find Your Invitation'
@@ -65,18 +68,15 @@ def ChooseRSVP(request, SearchResult):
         next
     return render(request, 'guests/rsvp.html', {'form': form, 'title': title})
 
-def SubmitRSVP(request, ChooseResult):
-    #make repeating form with
-    #RSVP Choice
-    #Plus One if Applicable
-    #Email (filledout already? and can replace with another email)
-    #Address (filledout already and replace?)
-    
-    title = 'dummy'
-    form = RSVPForForm(ChooseResult)
+def SubmitRSVP(request, ChooseResult):    
+    title = 'RSVP'
+    form = RSVPForm()
     
     return render(request, 'guests/rsvp.html', {'form': form, 'title': title})
 
 
 def registry(request):
-    return render(request, 'guests/test.html')
+    return render(request, 'guests/registry.html')
+
+def travel(request):
+    return render(request, 'guests/travel.html')

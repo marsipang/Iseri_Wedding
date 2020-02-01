@@ -18,3 +18,9 @@ class RSVPForForm(forms.Form):
         super(RSVPForForm, self).__init__(*args, **kwargs)
         self.fields['Invitees'].choices = [(o.GuestID, o.FirstName + ' ' + o.LastName) for o in Guest.objects.all().filter(InvitationID=InvitationID)]
         
+class RSVPForm(forms.Form):
+    rsvp = forms.ChoiceField(label='', choices=[(True, 'Yes'), (False, 'No')])
+    plusone = forms.BooleanField(label = 'Plus One Attending')
+    plusonefname = forms.CharField(label = 'Plus One First Name')
+    plusonelname = forms.CharField(label = 'Plus One Last Name')
+    email = forms.EmailField(label = 'Email')    

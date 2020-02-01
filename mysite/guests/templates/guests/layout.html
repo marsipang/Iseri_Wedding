@@ -5,17 +5,19 @@
         <title>Elizabeth & Ellison</title>
         <link rel="stylesheet" type="text/css" href="{% static 'guests/style.css' %}">
     </head>
-    <header>
-        <h1 class="logo">Elizabeth & Ellison</h1>
-        <div class="navbar">
-            <ul>
-            <li><a href="{% url 'guests:test' %}">Home</a></li>
-            <li><a href="{% url 'guests:rsvp' %}">RSVP</a></li>
-            <li><a href="{% url 'guests:test' %}">Registry</a></li>
-          </ul>
-        </div>
-    </header>
     <body>
+        <header>
+            <img class="logo" id="headerimg" src="{% static 'guests/images/Web Name Banner.png' %}"></img>
+            <div class="navbar">
+                <ul>
+                    <li><a href="{% url 'guests:home' %}">Home</a></li>
+                    <li><a href="{% url 'guests:details' %}">Details</a></li>
+                    <li><a href="{% url 'guests:rsvp' %}">RSVP</a></li>
+                    <li><a href="{% url 'guests:travel' %}">Travel</a></li>
+                    <li><a href="{% url 'guests:registry' %}">Registry</a></li>
+            </ul>
+            </div>
+        </header>
         {% block content %}
         {% endblock %}
         <script type="text/javascript" src="{% static 'js/jquery-3.4.1.min.js' %}"></script> 

@@ -1,0 +1,25 @@
+{% extends "guests/layout.html" %}
+{% load static %}
+{% block content %}
+    <div class="container">
+        <div class="singlecenter">
+            <h1>Registry</h1>
+            <p>We have registries at the following places</p>
+            <table class="regtable">
+                <tr>
+                    <td>
+                        <a href="https://www.amazon.com" target="_blank">
+                            <img class="regimg" src="{% static 'guests/images/amazon-logo-transparent-allwhite.png' %}">
+                        </a>
+                    </td>
+                    <td>
+                        <a href="https://www.crateandbarrel.com/" target="_blank">
+                            <img class="regimg" src="{% static 'guests/images/crate-barrel-logo-transparent-allwhite.png' %}">
+                        </a>
+                    </td>
+                </tr>
+            
+            </table>
+        </div>
+    </div>
+{% endblock %}
