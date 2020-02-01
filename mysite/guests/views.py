@@ -84,4 +84,5 @@ def travel(request):
 def weddingparty(request):
     Bride = [{'FirstName':i.FirstName, 'LastName':i.LastName, 'Title':i.Title} for i in WeddingParty.objects.all().filter(Relation='Bride')]
     Groom = [{'FirstName':i.FirstName, 'LastName':i.LastName, 'Title':i.Title} for i in WeddingParty.objects.all().filter(Relation='Groom')]
-    return render(request, 'guests/weddingparty.html', {'Bride':Bride, 'Groom':Groom})
+    Everybody = Bride + Groom
+    return render(request, 'guests/weddingparty.html', {'Bride':Bride, 'Groom':Groom, 'Everybody':Everybody})

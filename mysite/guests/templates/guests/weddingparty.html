@@ -12,7 +12,7 @@
             <h1> Bride Tribe </h1>
             {% for person in Bride %}
                 <div class="partyblockcontainer">
-                    <div class="partyimgcontainer" onclick="on()">
+                    <div class="partyimgcontainer" id="imgclick:{{ person.FirstName }}" onclick="on(this.id)">
                         <img class="weddingpartyimg" src="{% static 'guests/images/' %}{{ person.FirstName }}.jpg " >
                         <div class="wedimgoverlay">
                             <div class="partyimgtext"> 
@@ -29,7 +29,7 @@
             <h1> Groom Platoon </h1>
             {% for person in Groom %}
                 <div class="partyblockcontainer">
-                    <div class="partyimgcontainer">
+                    <div class="partyimgcontainer" id="imgclick:{{ person.FirstName }}" onclick="on(this.id)">
                         <img class="weddingpartyimg" src="{% static 'guests/images/' %}{{ person.FirstName }}.jpg " >
                         <div class="wedimgoverlay">
                             <div class="partyimgtext"> 
@@ -43,10 +43,10 @@
             {% endfor %}
         </div>
     </div>
-    {% for person in Bride %}
-    <div id="overlay" name="Overlay-{{person.FirstName}}" onclick="off()">
+    {% for person in Everybody %}
+    <div class="overlay" id="Overlay:{{ person.FirstName }}" onclick="off(this.id)">
         <div id="overlaycontent">
-            <img class="pageoverlayimg" src="{% static 'guests/images/' %}Lizzie.jpg " >
+            <img class="pageoverlayimg" src="{% static 'guests/images/' %}{{ person.FirstName }}.jpg " >
             <br>This is just a test blurb to test out length and design and functionality. The real thing will be a 
             description of the how the bride or groom met their crew/posse member. If they wanted the could also
             add a few more things about the person. I don't know it's really up to them.
@@ -59,12 +59,14 @@
 {% block javascript %}
 <script type="text/javascript" >
     var fname = $("#id_FirstName").val();
-    function on() {
-        document.getElementById("overlay").style.display = "block";
+    function on(clicked_id) {
+        var openid = "Overlay:".concat(clicked_id.split(":")[1])
+        console.log(openid)
+        document.getElementById(openid).style.display = "block";
     }
 
-    function off() {
-        document.getElementById("overlay").style.display = "none";
+    function off(opened_id) {
+        document.getElementById(opened_id).style.display = "none";
     }
 </script>
 {% endblock %}
