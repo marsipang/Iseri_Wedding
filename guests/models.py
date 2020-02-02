@@ -10,8 +10,8 @@ class Guest(models.Model):
     ZipCode = models.TextField()
     Email = models.EmailField(blank=True, null=True)
     Attending = models.BooleanField(blank=True, null=True)
-    InvitationID = models.TextField(blank=True, null=True)
-    GuestID = models.IntegerField(blank=True, null=True)
+    InvitationID = models.TextField()
+    GuestID = models.IntegerField()
     RSVPID = models.TextField(blank=True, null=True)
     UpdateBy = models.TextField(blank=True, null=True)
     
@@ -28,4 +28,4 @@ class WeddingParty(models.Model):
     LastName = models.TextField()
     Relation = models.TextField()
     Title = models.TextField()
-    About = models.TextField(null=True)
+    About = models.TextField()
