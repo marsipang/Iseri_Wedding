@@ -136,4 +136,5 @@ STATIC_URL = '/static/'
 django_heroku.settings(locals())
 
 #X_FRAME_OPTIONS = 'ALLOW-FROM https://material.io/resources/resizer/'
-X_FRAME_OPTIONS = 'ALLOW-FROM https://screenfly.org/'
+#X_FRAME_OPTIONS = 'ALLOW-FROM https://screenfly.org/'
+X_FRAME_OPTIONS = 'ALLOW-FROM http://www.responsinator.com/'
