@@ -28,3 +28,4 @@ class WeddingParty(models.Model):
     LastName = models.TextField()
     Relation = models.TextField()
     Title = models.TextField()
+    About = models.TextField(null=True)

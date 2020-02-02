@@ -2,8 +2,8 @@ from django import forms
 from .models import Guest
 
 class SearchForm(forms.Form):
-    FirstName = forms.CharField(label = 'First Name', widget=forms.Textarea(attrs={'rows':1, 'cols':15}))
-    LastName = forms.CharField(label = 'Last Name', widget=forms.Textarea(attrs={'rows':1, 'cols':15}))
+    FirstName = forms.CharField(label = 'First Name')
+    LastName = forms.CharField(label = 'Last Name')
     Email = forms.EmailField(label = 'Email Address')
 
 class DynamicMultipleChoiceField(forms.MultipleChoiceField): 

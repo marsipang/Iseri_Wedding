@@ -71,7 +71,6 @@ def ChooseRSVP(request, SearchResult):
 def SubmitRSVP(request, ChooseResult):    
     title = 'RSVP'
     form = RSVPForm()
-    
     return render(request, 'guests/rsvp.html', {'form': form, 'title': title})
 
 
@@ -82,7 +81,7 @@ def travel(request):
     return render(request, 'guests/travel.html')
 
 def weddingparty(request):
-    Bride = [{'FirstName':i.FirstName, 'LastName':i.LastName, 'Title':i.Title} for i in WeddingParty.objects.all().filter(Relation='Bride')]
-    Groom = [{'FirstName':i.FirstName, 'LastName':i.LastName, 'Title':i.Title} for i in WeddingParty.objects.all().filter(Relation='Groom')]
+    Bride = [{'FirstName':i.FirstName, 'LastName':i.LastName, 'Title':i.Title, 'About':i.About} for i in WeddingParty.objects.all().filter(Relation='Bride')]
+    Groom = [{'FirstName':i.FirstName, 'LastName':i.LastName, 'Title':i.Title, 'About':i.About} for i in WeddingParty.objects.all().filter(Relation='Groom')]
     Everybody = Bride + Groom
     return render(request, 'guests/weddingparty.html', {'Bride':Bride, 'Groom':Groom, 'Everybody':Everybody})

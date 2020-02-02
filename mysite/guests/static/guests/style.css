@@ -229,44 +229,9 @@ h1 {
     opacity: .9;
 }
 
-#slidecenter {
-    z-index: -1;
-    position: absolute;
-}
-
-.slideleft {
-    width: 30%;
-    height: auto; 
-    float:left; 
-    background-color: #7294ad;
-    opacity: .9;
-    text-align: center;
-    align-items: center;    
-    font-size: 18px;
-}
-
-.slideright {
-    width: 30%;
-    height: auto; 
-    float:right;
-    margin:auto 0px auto 0px;
-    padding:30px;
-    background-color: #7294ad;
-    opacity: .9;
-    text-align: center;
-    align-items: center;    
-    font-size: 18px;
-}
 
 
-
-
-
-
-
-
-
-  ul.errorlist {
+ul.errorlist {
     margin: 0;
     padding: 0;
 }
@@ -282,25 +247,30 @@ h1 {
     text-align: center;    
     border-radius: 3px;
 }
-input, textarea {
+
+form p{
+    width: 100%
+}
+
+form label{
+    float: left;
+    width: 25%;
+    text-align: left;
+}
+
+form input{
+    width: 73%;
+    height: 20px;
+}
+
+form ul{
     width: 100%;
-    padding: 5px!important;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box; 
-    border-radius: 3px;
-    border-style: solid;
-    border-width: 1px;
-    border-color: rgb(169,169,169)
+    list-style-type: none;
 }
-input {	
-    height: 30px;
+
+.buttoncontainer{
+    width: 100%;
 }
-.success {
-    background-color: rgba(0, 128, 0, 0.15);
-    padding: 10px;
-    text-align: center;
-    color: green;
-    border: 1px solid green;
-    border-radius: 3px;
+button {
+    height:30px;
 }

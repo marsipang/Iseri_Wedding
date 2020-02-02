@@ -47,9 +47,7 @@
     <div class="overlay" id="Overlay:{{ person.FirstName }}" onclick="off(this.id)">
         <div id="overlaycontent">
             <img class="pageoverlayimg" src="{% static 'guests/images/' %}{{ person.FirstName }}.jpg " >
-            <br>This is just a test blurb to test out length and design and functionality. The real thing will be a 
-            description of the how the bride or groom met their crew/posse member. If they wanted the could also
-            add a few more things about the person. I don't know it's really up to them.
+            <br>{{ person.About }}
         </div>
     </div>
     {% endfor %}
