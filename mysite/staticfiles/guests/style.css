@@ -1,0 +1,276 @@
+header {
+    background-color: white;
+    width: 100%;
+    opacity: .9;
+    padding-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  header h1.logo {
+    margin: 0;
+    font-size: 1.7em;
+    color: goldenrod;
+    text-transform: uppercase;
+    position: relative;
+    text-align:center;
+  }
+
+  #headerimg {
+    margin: 0;
+    max-height:300px;
+    max-width:300px;
+  }
+  .navbar {
+    background-color: white;
+    text-align:center;
+  }
+  .navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: inline-block;
+  }
+  
+  .navbar li {
+    float: left;
+  }
+  
+  .navbar li a {
+    display: block;
+    color:#7294ad;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  .navbar li a:hover {
+    color: lightsteelblue;
+  }
+  
+body {
+    color: white;
+    background-image: url('images/Website Background4.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+h1 {
+    display: block;
+    font-size: 2em;
+    margin-top: 0.67em;
+    margin-bottom: 0.67em;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: bold;
+    border-bottom: 1px solid white;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+.container {
+    display: inline-flex;  
+    width: 100%;
+}
+
+.singlecenter {
+    width: 100%;
+    margin: auto 100px;
+    padding: 20px;
+    text-align: center;
+    align-items:center;
+    background-color: #7294ad;
+    opacity: .9;
+    font-size: 18px;
+}
+
+.divLeft {
+    width: 45%; 
+    height: auto; 
+    float:left; 
+    margin:auto 10px auto 30px;
+    padding:30px;
+    text-align: center;
+    align-items: center;
+    font-size: 18px;
+}
+
+.divRight {
+    width: 45%;
+    height: auto; 
+    float:right; 
+    margin:auto 30px auto 10px;
+    padding:30px;
+    background-color: #7294ad;
+    opacity: .9;
+    text-align: center;
+    align-items: center;    
+    font-size: 18px;
+}
+
+.homecontainer {
+    width: 100%;
+    margin: auto 100px;
+    padding: 20px;
+    text-align: center;
+    align-items:center;
+}
+
+#instaicon {
+    width: 20px;
+}
+
+.icon {
+    height: 40px;
+}
+
+.regtable {
+    width: 100%;
+}
+
+.regtable td{
+    width:50%;
+}
+
+.regimg {
+    width: 250px;
+    height: 250px;
+}
+
+.partyblockcontainer {
+    width: 30%;
+    float: right;
+    margin: 8px;
+}
+
+.partyimgcontainer {
+    position: relative;
+    width: 100%;
+    
+}
+
+.weddingpartyimg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.wedimgoverlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+    background: rgb(0, 0, 0);
+    background: rgba(0, 0, 0, 0.5); /* Black see-through */
+    color: #f1f1f1;
+  }
+
+  .partyimgcontainer:hover .wedimgoverlay {
+    opacity: 1;
+  }
+
+  .partyimgtext {
+    color: white;
+    font-size: 18px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
+.pageoverlayimg {
+    max-width: 300px;
+}
+
+.overlay {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.8);
+    z-index: 2;
+    cursor: pointer;
+  }
+
+  #overlaycontent{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 24px;
+    color: white;
+    transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    text-align: center;
+  }
+
+#partyleft {
+    background-color: #7294ad;
+    opacity: .9;
+}
+
+
+
+ul.errorlist {
+    margin: 0;
+    padding: 0;
+}
+.errorlist li {
+    border: 1px solid red;
+    color: red;
+    background: rgba(255, 0, 0, 0.15);
+    list-style-position: inside;
+    display: block;
+    font-size: 1.2em;
+    margin: 0 0 3px;
+    padding: 4px 5px;
+    text-align: center;    
+    border-radius: 3px;
+}
+
+form p{
+    width: 100%
+}
+
+form label{
+    float: left;
+    width: 25%;
+    text-align: left;
+}
+
+form input{
+    width: 73%;
+    height: 20px;
+}
+
+form ul{
+    width: 100%;
+    list-style-type: none;
+}
+
+.buttoncontainer{
+    width: 100%;
+}
+button {
+    height:30px;
+}
