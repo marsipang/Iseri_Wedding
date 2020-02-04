@@ -1,0 +1,473 @@
+{% extends "layout.html" %}
+{% import "jobs_macros.html" as jm %}
+{% block content %}
+	{% for job in ujob %}
+		<h1 align = center> {{ job }} </h1>
+	{% endfor %}
+	<p></p>
+		<div align = center>
+			<style type="text/css">
+				table tbody td:hover { background-color: #ffff99;}
+				display: flex;
+				flex-flow: row wrap;
+				-webkit-flex-flow: row wrap;
+				justify-content: space-around;
+			</style>
+			<table style = "font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 1em; border: 2px solid black; border-collapse: collapse;">
+				<tbody>
+						<tr>
+							<td style = "border: .1px solid black; border-collapse: collapse;"><b>Requested By:</b></td>
+							<td style = "border: .1px solid black; border-collapse: collapse;">{{ jobdetails.REQ_BY }}</td>
+							<td style = "border: .1px solid black; border-collapse: collapse;"><b>DM Lead:</b></td>
+							<td style = "border: .1px solid black; border-collapse: collapse;">{{ jobdetails.DM_LEAD }}</td>
+							<td style = "border: .1px solid black; border-collapse: collapse;"><b>AD Lead:</b></td>
+							<td style = "border: .1px solid black; border-collapse: collapse;">{{ jobdetails.AD_LEAD }}</td>
+						</tr>
+						<tr>
+							<td style = "border: .1px solid black; border-collapse: collapse;"><b>Area:</b></td>
+							<td style = "border: .1px solid black; border-collapse: collapse;">{{ jobdetails.AREA }}</td>
+							<td style = "border: .1px solid black; border-collapse: collapse;"><b>Category:</b></td>
+							<td style = "border: .1px solid black; border-collapse: collapse;">{{ jobdetails.CATEGORY }}</td>
+							<td style = "border: .1px solid black; border-collapse: collapse;"><b>Quantity:</b></td>
+							<td style = "border: .1px solid black; border-collapse: collapse;">{{ jobdetails.QUANTITY }}</td>
+						</tr>
+						<tr>
+							<td style = "border: .1px solid black; border-collapse: collapse;"><b>DM Folder:</b></td>
+							<td colspan="5" style = "border: .1px solid black; border-collapse: collapse;">{{ jobdetails.FOLDER }}</td>
+						</tr>
+						<tr>
+							<td style = "border: .1px solid black; border-collapse: collapse;"><b>AD Folder:</b></td>
+							<td colspan="5" style = "border: .1px solid black; border-collapse: collapse;">{{ jobdetails.AD_FOLDER }}</td>
+						</tr>
+						<tr>
+							<td style = "border: .1px solid black; border-collapse: collapse;"><b>Description:</b></td>
+							<td colspan="5" style = "border: .1px solid black; border-collapse: collapse; font-size: 0.8em;">{{ jobdetails.DESCRIPTION }}</td>
+						</tr>
+						<tr>
+							<td style = "border: .1px solid black; border-collapse: collapse;"><b>Objective:</b></td>
+							<td colspan="5" style = "border: .1px solid black; border-collapse: collapse; font-size: 0.8em;">{{ jobdetails.OBJECTIVE }}</td>
+						</tr>
+						<tr>
+							<td style = "border: .1px solid black; border-collapse: collapse;"><b>Regulatory Requirement:</b></td>
+							<td style = "border: .1px solid black; border-collapse: collapse; font-size: 0.8em;">{{ jobdetails.REGULATORY_FLAG }}</td>
+							<td style = "border: .1px solid black; border-collapse: collapse;"><b>Drop Date:</b></td>
+							<td style = "border: .1px solid black; border-collapse: collapse; font-size: 0.8em;">{{ jobdetails.DROP_DATE }}</td>
+							<td style = "border: .1px solid black; border-collapse: collapse;"><b>Latest Possible<br>Drop Date:</b></td>
+							<td style = "border: .1px solid black; border-collapse: collapse; font-size: 0.8em;">{{ jobdetails.LATEST_DROP_DATE }}</td>
+						</tr>
+						<tr>
+							<td style = "border: .1px solid black; border-collapse: collapse;"><b>Date Flexibility<br>Explanation:</b></td>
+							<td colspan="5" style = "border: .1px solid black; border-collapse: collapse; font-size: 0.8em;">{{ jobdetails.DATE_DESC }}</td>
+						</tr>
+						<tr>
+							<td style = "border: .1px solid black; border-collapse: collapse;"><b>Expected Response Rate:</b></td>
+							<td style = "border: .1px solid black; border-collapse: collapse; font-size: 0.8em;">{{ jobdetails.EXPECTED_RESPONSE_RATE }}%</td>
+							<td style = "border: .1px solid black; border-collapse: collapse;"><b>Expected Revenue per Mailer:</b></td>
+							<td style = "border: .1px solid black; border-collapse: collapse; font-size: 0.8em;">${{ jobdetails.EXPECTED_REVENUE }}</td>
+							<td style = "border: .1px solid black; border-collapse: collapse;"><b><a href="{{ url_for('wiki_landing.wikipolicies', some_policy = 'Community Reinvestment Act') }}" target="_blank" style="text-decoration: none;">Qualifies for CRA:</a></b></td>
+							<td style = "border: .1px solid black; border-collapse: collapse; font-size: 0.8em;">{{ jobdetails.CRA_FLAG }}</td>
+						</tr>
+						<tr>
+							<td style = "border: .1px solid black; border-collapse: collapse;"><b>Notes:</b></td>
+							<td colspan="5" style = "border: .1px solid black; border-collapse: collapse; font-size: 0.8em;">{{ jobdetails.NOTES }}</td>
+						</tr>
+				</tbody>
+			</table>
+			{% if permissions == 'Edit' or permissions == 'Peer'%}
+				<form class="form" id="EditForm" role="form" method="post" action="">
+					{{ form.csrf_token }}
+					<p> 
+						{{ macros.render_field(form.JobField) }}
+						<p>{{ macros.render_field(form.JobSelect) }}</p>
+						<p>{{ macros.render_field(form.JobSInt) }}</p>
+						<p>{{ macros.render_field(form.JobText, cols="125", rows="5") }}</p>
+						<p>{{ macros.render_field(form.JobDate) }}</p>
+						<p>{{ macros.render_field(form.JobInt) }}</p>
+						<p>{{ macros.render_field(form.JobSelMult) }}</p>
+						<p>{{ macros.render_field(form.JobText2) }}</p>
+						<p>{{ macros.render_field(form.JobText3, cols="125", rows="5") }}</p>
+						<p>{{ macros.render_field(form.JobBoo) }}</p>
+						{{ macros.render_button(name='Edit Job', value='Edit Job') }}
+						{% if error %}
+							<p class="error"><strong>Sorry!</strong> {{ error }}</p>
+						{% endif %}
+					</p>
+				</form>
+			{% endif %}
+			<h3>Timeline</h3>
+			<p>{{ jm.gantt_key() }}</p>
+			{{ jm.jobs_gantt(headers, data, ujob, jobdata, job_column=false) }}
+			<p></p>
+			<table style = "font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 1em; border: 2px solid black; border-collapse: collapse;">
+				<thead>
+					<tr>
+						<td style = "border: .1px solid black; border-collapse: collapse;"><b>Step #</b></td>
+						<td style = "border: .1px solid black; border-collapse: collapse;"><b>Step</b></td>
+						<td style = "border: .1px solid black; border-collapse: collapse;"><b>Date</b></td>
+						<td style = "border: .1px solid black; border-collapse: collapse;"><b>Party Responsible</b></td>
+						<td style = "border: .1px solid black; border-collapse: collapse;"><b>Notes</b></td>
+					</tr>
+				</thead>
+				<tbody>
+					{% for row in jobdata %}
+						<tr>
+							<td style = "border: .1px solid black; border-collapse: collapse;">{{ row.STEP_NO }}</td>
+							<td style = "border: .1px solid black; border-collapse: collapse;">{{ row.Step }}</td>
+							<td style = "border: .1px solid black; border-collapse: collapse;">{{ row.StepDt }}</td>
+							<td style = "border: .1px solid black; border-collapse: collapse;">{{ row.Responsible }}</td>							
+							<td style = "border: .1px solid black; border-collapse: collapse;">{{ row.StepNote }}</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>		
+			<h3>Job Options</h3>
+			<table style = "font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 1em; border: 2px solid black; border-collapse: collapse; display: inline-table">
+				<tbody>
+						<tr>
+							<td colspan="2" style = "border: .1px solid black; border-collapse: collapse;"><b>Suppression Criteria</b></td>
+							<td colspan="2" style = "border: .1px solid black; border-collapse: collapse;"><b>Geography to Include</b></td>
+						</tr>
+						<tr>
+							<td style = "border: .1px solid black; border-collapse: collapse;"><a href="{{ url_for('wiki_landing.wikipolicies', some_policy = 'Suppressing Email Opt-Out') }}" style="text-decoration: none;">Suppress Email Opt-Out</a></td>
+							<td style = "border: .1px solid black; border-collapse: collapse;">{{ jobdetails.SUPPRESS_EMAIL_OPTOUT }}</td>
+							<td style = "border: .1px solid black; border-collapse: collapse;">Hawaii</td>
+							<td style = "border: .1px solid black; border-collapse: collapse;">{{ jobdetails.SEND_HAWAII }}</td>
+						</tr>
+						<tr>
+							<td style = "border: .1px solid black; border-collapse: collapse;">Suppress missing CNUM</td>
+							<td style = "border: .1px solid black; border-collapse: collapse;">{{ jobdetails.SUPPRESS_MISSING_CNUM }}</td>
+							<td style = "border: .1px solid black; border-collapse: collapse;">Guam</td>
+							<td style = "border: .1px solid black; border-collapse: collapse;">{{ jobdetails.SEND_GUAM }}</td>
+						</tr>
+						<tr>
+							<td style = "border: .1px solid black; border-collapse: collapse;">Suppress businesses</td>
+							<td style = "border: .1px solid black; border-collapse: collapse;">{{ jobdetails.SUPPRESS_BUSINESSES }}</td>
+							<td style = "border: .1px solid black; border-collapse: collapse;">Saipan</td>
+							<td style = "border: .1px solid black; border-collapse: collapse;">{{ jobdetails.SEND_SAIPAN }}</td>
+						</tr>
+						<tr>
+							<td style = "border: .1px solid black; border-collapse: collapse;">Suppress Inactive accounts<br>(if CNUM is not in MCIF)</td>
+							<td style = "border: .1px solid black; border-collapse: collapse;">{{ jobdetails.SUPPRESS_INACTIVE }}</td>	
+							<td style = "border: .1px solid black; border-collapse: collapse;">Mainland USA:</td>
+							<td style = "border: .1px solid black; border-collapse: collapse;">{{ jobdetails.SEND_MAINLAND }}</td>
+						</tr>
+						<tr>
+							<td style = "border: .1px solid black; border-collapse: collapse;">Suppress Do Not Mail (paper):</td>
+							<td style = "border: .1px solid black; border-collapse: collapse;">{{ jobdetails.SUPPRESS_DO_NOT_MAIL }}</td>
+							<td style = "border: .1px solid black; border-collapse: collapse;">Other (Foreign, UNK)</td>
+							<td style = "border: .1px solid black; border-collapse: collapse;">{{ jobdetails.SEND_OTHER }}</td>
+						</tr>
+						<tr>
+							<td style = "border: .1px solid black; border-collapse: collapse;">Suppress Board of Directors</td>
+							<td style = "border: .1px solid black; border-collapse: collapse;">{{ jobdetails.SUPPRESS_BOD }}</td>
+							<td colspan="2" style = "border: .1px solid black; border-collapse: collapse;"></td>
+						</tr>
+						<tr>
+							<td style = "border: .1px solid black; border-collapse: collapse;">Suppress Senior Management Committee</td>
+							<td style = "border: .1px solid black; border-collapse: collapse;">{{ jobdetails.SUPPRESS_SMC }}</td>
+							<td colspan="2" style = "border: .1px solid black; border-collapse: collapse;"></td>
+						</tr>
+						<tr>
+							<td style = "border: .1px solid black; border-collapse: collapse;">Suppress FHB employees</td>
+							<td style = "border: .1px solid black; border-collapse: collapse;">{{ jobdetails.SUPPRESS_EMPLOYEES }}</td>
+							<td colspan="2" style = "border: .1px solid black; border-collapse: collapse;"></td>
+						</tr>
+						<tr>
+							<td style = "border: .1px solid black; border-collapse: collapse;">Suppress Private Banking</td>
+							<td style = "border: .1px solid black; border-collapse: collapse;">{{ jobdetails.SUPPRESS_PRIVATE_BANKING }}</td>
+							<td colspan="2" style = "border: .1px solid black; border-collapse: collapse;"></td>
+						</tr>
+						<tr>
+							<td style = "border: .1px solid black; border-collapse: collapse;">Suppress Invalid Names</td>
+							<td style = "border: .1px solid black; border-collapse: collapse;">{{ jobdetails.SUPPRESS_INVALID_NAME }}</td>
+							<td colspan="2" style = "border: .1px solid black; border-collapse: collapse;"></td>
+						</tr>
+				</tbody>
+			</table>
+			<table id = "columnstbl" style = "font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 1em; border: 2px solid black; border-collapse: collapse; display: inline-table;">
+				<td style = "border: .1px solid black; border-collapse: collapse;"><b>Data Columns to Include</b></td>
+				{% for col in coldata %}
+				<tr>
+					<td style = "border: .1px solid black; border-collapse: collapse;">{{ col.COLUMN_NAME }}</td>
+				</tr>
+				{% endfor %}
+			</table>
+			
+	</div>
+	
+	<script charset="utf-8" type="text/javascript">
+		var job_field = document.getElementById('JobField');
+		var job_text = document.getElementById('JobText');
+		var job_text_label = document.querySelector('label[for= JobText]');
+		var job_select = document.getElementById('JobSelect');
+		var job_select_label = document.querySelector('label[for= JobSelect]');
+		var job_sint = document.getElementById('JobSInt');
+		var job_sint_label = document.querySelector('label[for= JobSInt]');
+		var job_date = document.getElementById('JobDate');
+		var job_date_label = document.querySelector('label[for= JobDate]');
+		var job_int = document.getElementById('JobInt');
+		var job_int_label = document.querySelector('label[for= JobInt]');
+		var job_selmult = document.getElementById('JobSelMult');
+		var job_selmult_label = document.querySelector('label[for= JobSelMult]');
+		var pageurl = window.location.href;
+		var jobno = pageurl.split('/')[pageurl.split('/').length - 2];
+		var job_text2 = document.getElementById('JobText2');
+		var job_text2_label = document.querySelector('label[for= JobText2]');
+		var job_text3 = document.getElementById('JobText3');
+		var job_text3_label = document.querySelector('label[for= JobText3]');
+		var job_boo = document.getElementById('JobBoo');
+		var job_boo_label = document.querySelector('label[for= JobBoo]');
+		
+		function hidetext() {
+			job_text.style.display = 'none';
+			job_text_label.style.display = 'none';
+			job_text.value = 'NA';
+		}
+		
+		function hideselect() {
+			job_select.style.display = 'none';
+			job_select_label.style.display = 'none';
+			job_select.optionHTML += '<option value="NA">N/A</option>';
+			job_select.value = 'N/A';
+		}
+		
+		function hidesint() {
+			job_sint.style.display = 'none';
+			job_sint_label.style.display = 'none';
+			job_sint.optionHTML += '<option value=0>"1-Start Job"</option>';
+			job_sint.value = 1;
+		}
+		
+		function hidedate() {
+			job_date.style.display = 'none';
+			job_date_label.style.display = 'none';
+			job_date.value = '1900-01-01';
+		}
+		
+		function hideint() {
+			job_int.style.display = 'none';
+			job_int_label.style.display = 'none';
+			job_int.value = 0;
+		}
+		
+		function hideselmult() {
+			job_selmult.style.display = 'none';
+			job_selmult_label.style.display = 'none';
+			job_selmult.value = 'FULL_NAME';
+		}
+		
+		function hidetext2() {
+			job_text2.style.display = 'none';
+			job_text2_label.style.display = 'none';
+			job_text2.value = 'NA';
+		}
+		
+		function hidetext3() {
+			job_text3.style.display = 'none';
+			job_text3_label.style.display = 'none';
+			job_text3.value = 'NA';
+		}
+		
+		function hideboolean() {
+			job_boo.style.display = 'none';
+			job_boo_label.style.display = 'none';
+		}
+		
+		function defaultJob() {
+			hidetext();
+			hideselect();
+			hidesint();
+			hidedate();
+			hideint();
+			hideselmult();
+			hidetext2();
+			hidetext3();
+			hideboolean();
+		}
+		
+		function editJob() {
+			console.log(job_field.value);
+			if(job_field.value == "NA" | job_field.value == "Claim" | job_field.value == "Complete" | job_field.value == "Canceled" | job_field.value == "Reopened") {
+				defaultJob();
+			} else if(job_field.value == "Assign" | job_field.value == "DM_FLAG" | job_field.value == "AD_FLAG" | job_field.value == "REQ_BY" | job_field.value == "AREA" | job_field.value == "CATEGORY" | job_field.value == "SWITCH_SUPP" | job_field.value == "RM_COLUMN") {
+				hidetext();
+				job_select.style.display = 'block';
+				job_select_label.style.display = 'block';
+				field = job_field.value;
+				fetch('/jobs/choices/' + field).then(function(response) {
+					response.json().then(function(data) {
+						var optionHTML = '';
+						for (var person of data){
+							optionHTML += '<option value="' + person.DATA_VALUE + '">' + person.VIEW_VALUE + '</option>';
+						}
+						job_select.innerHTML = optionHTML;
+					});
+				});
+				hidesint();
+				hidedate();
+				hideint();
+				hideselmult();
+				hidetext2();
+				hidetext3();
+				hideboolean();
+			} else if(job_field.value == "DATA_DUE_DATE" | job_field.value == "DROP_DATE") {
+				hidetext();
+				hideselect();
+				hidesint()
+				job_date.style.display = 'block';
+				job_date_label.style.display = 'block';
+				job_date.value = '';
+				hideint();
+				hideselmult();
+				hidetext2();
+				hidetext3();
+				hideboolean();
+			} else if(job_field.value == "EXPECTED_RESPONSE_RATE" | job_field.value == "EXPECTED_REVENUE" | job_field.value == "QUANTITY"){
+				hidetext();
+				hideselect();
+				hidesint()
+				hidedate();
+				job_int.style.display = 'block';
+				job_int_label.style.display = 'block';
+				job_int.value = '';
+				hideselmult();
+				hidetext2();
+				hidetext3();
+				hideboolean();
+			} else if(job_field.value == "STEP_DATE") {
+				hidetext();
+				hideselect();
+				job_sint.style.display = 'block';
+				job_sint_label.style.display = 'block';
+				fetch('/jobs/stepchoices/' + jobno).then(function(response) {
+					response.json().then(function(data) {
+						var optionHTML = '';
+						for (var person of data){
+							optionHTML += '<option value="' + person.DATA_VALUE + '">' + person.VIEW_VALUE + '</option>';
+						}
+						job_sint.innerHTML = optionHTML;
+					});
+				});
+				job_date.style.display = 'block';
+				job_date_label.style.display = 'block';
+				job_date.value = '';
+				hideint();
+				hideselmult();
+				hidetext2();
+				hidetext3();
+				hideboolean();
+			} else if(job_field.value == "STEP_RESP") {
+				job_text.style.display = 'block';
+				job_text_label.style.display = 'block';
+				job_text.value = '';
+				hideselect();
+				job_sint.style.display = 'block';
+				job_sint_label.style.display = 'block';
+				fetch('/jobs/stepchoices/' + jobno).then(function(response) {
+					response.json().then(function(data) {
+						var optionHTML = '';
+						for (var person of data){
+							optionHTML += '<option value="' + person.DATA_VALUE + '">' + person.VIEW_VALUE + '</option>';
+						}
+						job_sint.innerHTML = optionHTML;
+					});
+				});
+				hidedate();
+				hideint();
+				hideselmult();
+				hidetext2();
+				hidetext3();
+				hideboolean();
+			} else if(job_field.value == "STEP_RM" | job_field.value == "STEP_DONE") {
+				hidetext();
+				hideselect();
+				job_sint.style.display = 'block';
+				job_sint_label.style.display = 'block';
+				fetch('/jobs/stepchoices/' + jobno).then(function(response) {
+					response.json().then(function(data) {
+						var optionHTML = '';
+						for (var person of data){
+							optionHTML += '<option value="' + person.DATA_VALUE + '">' + person.VIEW_VALUE + '</option>';
+						}
+						job_sint.innerHTML = optionHTML;
+					});
+				});
+				hidedate();
+				hideint();
+				hideselmult();
+				hidetext2();
+				hidetext3();
+				hideboolean();
+			} else if(job_field.value == "ADD_STEP") {
+				job_text.style.display = 'block';
+				job_text_label.innerHTML = 'Step:'
+				job_text_label.style.display = 'block';
+				job_text.value = '';
+				hideselect();
+				hidesint();
+				job_date.style.display = 'block';
+				job_date_label.style.display = 'block';
+				job_date.value = '';
+				job_int.style.display = 'block';
+				job_int_label.innerHTML = 'Step Number:';
+				job_int_label.style.display = 'block';
+				job_int.value = '2';
+				hideselmult();
+				job_text2.style.display = 'block';
+				job_text2_label.style.display = 'block';
+				job_text2.value = '';
+				job_text3.style.display = 'block';
+				job_text3_label.style.display = 'block';
+				job_text3.value = '';
+				hideboolean();
+			} else if(job_field.value == "ADD_COLUMN") {
+				hidetext();
+				hideselect();
+				hidesint();
+				hidedate();
+				hideint();
+				job_selmult.style.display = 'block';
+				job_selmult_label.display = 'block';
+				job_selmult.value = '';
+				hidetext2();
+				job_text3.style.display = 'block';
+				job_text3_label.innerHTML = 'If Other:';
+				job_text3_label.style.display = 'block';
+				job_text3.value = '';
+				hideboolean();
+			} else if(job_field.value == "AUDIT_APPROVAL"){
+				hidetext();
+				hideselect();
+				hidesint();
+				hidedate();
+				hideint();
+				hideselmult();
+				hidetext2();
+				hidetext3();
+				job_boo.style.display = 'block';
+				job_boo_label.style.display = 'block';
+			} else {
+				job_text.style.display = 'block';
+				job_text_label.style.display = 'block';
+				job_text.value = '';
+				hideselect();
+				hidesint();
+				hidedate();
+				hideint();
+				hideselmult();
+				hidetext2();
+				hidetext3();
+				hideboolean();
+			}
+		}
+		
+	
+		onload = editJob();
+		job_field.onchange = function() {
+			editJob();
+		}
+		
+	</script>	
+	
+	
+{% endblock %}

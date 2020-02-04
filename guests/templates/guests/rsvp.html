@@ -39,6 +39,29 @@
                 }
             }
         });
-    });        
+    });
+
+    $().ready(function(){
+        $("#id_plusonefname").hide();
+            $('label[for="id_plusonefname"]').hide();
+            $("#id_plusonelname").hide();
+            $('label[for="id_plusonelname"]').hide();
+    });
+
+    $('#id_plusone_0').click(function() {
+        if($('#id_plusone_0').is(":checked")) {
+            $('#id_plusonefname').show();
+            $('label[for="id_plusonefname"]').show();
+            $('#id_plusonelname').show();
+            $('label[for="id_plusonelname"]').show();
+        } else {
+            $("#id_plusonefname").hide();
+            $('label[for="id_plusonefname"]').hide();
+            $("#id_plusonelname").hide();
+            $('label[for="id_plusonelname"]').hide();
+        }
+    });
+
+
 </script>
 {% endblock %}

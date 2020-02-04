@@ -47,7 +47,7 @@ def validate_guest(request):
     return JsonResponse(data)
 
 def ChooseRSVP(request, SearchResult):
-    title = 'Choose Who To RSVP For'
+    title = 'Let us know Who is Attending'
     invid = SearchResult.split('!')[0]
     guestid = SearchResult.split('!')[1]
     form = RSVPForForm(invid)

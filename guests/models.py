@@ -8,6 +8,9 @@ class Guest(models.Model):
     InvitationID = models.TextField()
     GuestID = models.IntegerField()
     UpdateBy = models.TextField(blank=True, null=True)
+    PlusOne = models.BooleanField(blank=True)
+    PlusOneFirstName = models.TextField(blank=True, null=True)
+    PlusOneLastName = models.TextField(blank=True, null=True)
     
     def __str__(self):
         return self.FirstName
