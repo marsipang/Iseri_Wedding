@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from .forms import SearchForm, RSVPForForm, RSVPForm
-from .models import Guest, WeddingParty
+from .models import Guest, WeddingParty, Email
 from django.db.models.functions import Concat, Lower
 from django.db.models import Count, F, Value
 from django.urls import reverse
@@ -26,8 +26,8 @@ def FindRSVP(request):
                 GuestObj = Guest.objects.get(LastName__iexact=cd['LastName'], 
                                            FirstName__iexact=cd['FirstName'])
                 result = GuestObj.InvitationID + '!' + str(GuestObj.GuestID)
-                GuestObj.Email = cd['Email']
-                GuestObj.save()
+                emailrecord = Email(InvitationID=GuestObj.InvitationID, Email=cd['Email'])
+                emailrecord.save()
             except:
                 pass
             if result != "No Post":
@@ -52,16 +52,16 @@ def ChooseRSVP(request, SearchResult):
     guestid = SearchResult.split('!')[1]
     form = RSVPForForm(invid)
     if request.method == 'POST':
-        form = RSVPForForm(SearchResult, request.POST)
+        form = RSVPForForm(invid, request.POST)
         if form.is_valid():
             cd = form.cleaned_data
-            id_list = cd['Invitees']
-            user = Guest.objects.get(GuestID=guestid)
-            useremail = user.Email
-            username = user.FirstName + ' ' + user.LastName
-            rsvpid = 'temprsvpid'
-            Guest.objects.filter(GuestID__in=id_list).update(Email=useremail, RSVPID=rsvpid, UpdateBy=username)
-            return HttpResponseRedirect(reverse('guests:submitrsvp', args=(rsvpid,)))
+#            id_list = cd['Invitees']
+#            user = Guest.objects.get(GuestID=guestid)
+#            useremail = user.Email
+#            username = user.FirstName + ' ' + user.LastName
+#            rsvpid = 'temprsvpid'
+#            Guest.objects.filter(GuestID__in=id_list).update(RSVPID=rsvpid, UpdateBy=username)
+            return HttpResponseRedirect(reverse('guests:choosersvp', args=(SearchResult,)))
         else:
             next
     else:

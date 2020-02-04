@@ -1,7 +1,7 @@
 header {
     background-color: white;
     width: 100%;
-    opacity: .8;
+    opacity: .9;
     padding-top: 10px;
     margin-bottom: 10px;
     text-align: center;
@@ -59,6 +59,10 @@ body {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    font-family: Tw Cen MT Condensed;
+    text-transform: uppercase;
+    font-size: 14pt;
+    letter-spacing: 2px;
 }
 
 h1 {
@@ -90,7 +94,7 @@ h1 {
     align-items:center;
     background-color: #7294ad;
     opacity: .85;
-    font-size: 18px;
+    font-size: 16pt;
 }
 
 .divLeft {
@@ -111,10 +115,10 @@ h1 {
     margin:auto 30px auto 10px;
     padding:30px;
     background-color: #7294ad;
-    opacity: .85;
+    opacity: .9;
     text-align: center;
     align-items: center;    
-    font-size: 18px;
+    font-size: 16pt;
 }
 
 .homecontainer {
@@ -258,14 +262,27 @@ form label{
     text-align: left;
 }
 
-form input{
+form input[type="text"]{
     width: 73%;
     height: 20px;
 }
 
+form input[type="email"]{
+    width: 73%;
+    height: 20px;
+}
+
+form input[type="checkbox"] {
+    width: 50%;
+    height: 20px;
+}
+
 form ul{
-    width: 100%;
     list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    text-align: center;
 }
 
 .buttoncontainer{

@@ -8,15 +8,20 @@ class SearchForm(forms.Form):
 
 class DynamicMultipleChoiceField(forms.MultipleChoiceField): 
     def clean(self, value): 
-        return value
+        if len(value) != 1:
+            raise forms.ValidationError('Please RSVP for this person')
+        else:
+            return value
 
 class RSVPForForm(forms.Form):
-    Invitees = DynamicMultipleChoiceField(label='', widget=forms.CheckboxSelectMultiple, choices=[])
     def __init__(self, InvitationID, *args, **kwargs):
         self.request = kwargs.pop('request', None)
         
         super(RSVPForForm, self).__init__(*args, **kwargs)
-        self.fields['Invitees'].choices = [(o.GuestID, o.FirstName + ' ' + o.LastName) for o in Guest.objects.all().filter(InvitationID=InvitationID)]
+        for i in Guest.objects.all().filter(InvitationID=InvitationID):
+            self.fields['rsvp_' + str(i.GuestID)] = DynamicMultipleChoiceField(label=i.FirstName + ' ' + i.LastName, 
+                        choices=[('True', 'Yes'), (False, 'No')], widget=forms.CheckboxSelectMultiple())        
+        
         
 class RSVPForm(forms.Form):
     rsvp = forms.ChoiceField(label='', choices=[(True, 'Yes'), (False, 'No')])

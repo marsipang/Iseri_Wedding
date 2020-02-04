@@ -4,15 +4,9 @@ from django.db import models
 class Guest(models.Model):
     FirstName = models.TextField()
     LastName = models.TextField()
-    Address = models.TextField()
-    City = models.TextField()
-    State = models.TextField()
-    ZipCode = models.TextField()
-    Email = models.EmailField(blank=True, null=True)
     Attending = models.BooleanField(blank=True, null=True)
     InvitationID = models.TextField()
     GuestID = models.IntegerField()
-    RSVPID = models.TextField(blank=True, null=True)
     UpdateBy = models.TextField(blank=True, null=True)
     
     def __str__(self):
@@ -22,7 +16,12 @@ class Guest(models.Model):
     check_rsvp.admin_order_field = 'Attending'
     check_rsvp.boolean = True
     check_rsvp.short_description = 'Published recently?'
-    
+
+class Email(models.Model):
+    InvitationID = models.TextField()
+    Email = models.EmailField()
+
+
 class WeddingParty(models.Model):
     FirstName = models.TextField()
     LastName = models.TextField()
