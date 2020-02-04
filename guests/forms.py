@@ -24,8 +24,8 @@ class RSVPForForm(forms.Form):
             if i.PlusOne:
                 self.fields['plusone'] = DynamicMultipleChoiceField(label='Plus One', 
                         choices=[(True, 'Yes'), (False, 'No')], widget=forms.CheckboxSelectMultiple())   
-                self.fields['plusonefname'] = forms.CharField(label = 'Plus One First Name', required=False)
-                self.fields['plusonelname'] = forms.CharField(label = 'Plus One Last Name', required=False)
+                self.fields['PlusOneFirstName'] = forms.CharField(label = 'Plus One First Name', required=False)
+                self.fields['PlusOneLastName'] = forms.CharField(label = 'Plus One Last Name', required=False)
 
                 def get_fields(self, request, obj=None):
                     if obj is None:
@@ -35,12 +35,15 @@ class RSVPForForm(forms.Form):
 
     
     def clean(self):
-        plusone = self.cleaned_data.get('plusone')
-    
-        if 'True' in plusone:
-            msg = forms.ValidationError("This field is required")
-            self.add_error('plusonefname', msg)
-            self.add_error('plusonelname', msg)
+        try:
+            plusone = self.cleaned_data.get('plusone')
+        
+            if 'True' in plusone:
+                msg = forms.ValidationError("This field is required")
+                self.add_error('plusonefname', msg)
+                self.add_error('plusonelname', msg)
+        except:
+            pass
 
 
 

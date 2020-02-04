@@ -55,13 +55,20 @@ def ChooseRSVP(request, SearchResult):
         form = RSVPForForm(invid, request.POST)
         if form.is_valid():
             cd = form.cleaned_data
-#            id_list = cd['Invitees']
-#            user = Guest.objects.get(GuestID=guestid)
-#            useremail = user.Email
-#            username = user.FirstName + ' ' + user.LastName
-#            rsvpid = 'temprsvpid'
-#            Guest.objects.filter(GuestID__in=id_list).update(RSVPID=rsvpid, UpdateBy=username)
-            return HttpResponseRedirect(reverse('guests:choosersvp', args=(SearchResult,)))
+            cdfields = cd.keys()
+            Result = []
+            for field in cdfields:
+                if field == 'plusone':
+                    Guest.objects.filter(GuestID__in=guestid).update(PlusOneAttending=''.join(cd[field]))
+                elif field in ['PlusOneFirstName', 'PlusOneLastName']:
+                    if cd['plusone'] == True:
+                        Guest.objects.filter(GuestID__in=guestid).update(field=cd[field])
+                    else:
+                        next
+                else:
+                    gid = field.replace('rsvp_', '')
+                    Guest.objects.filter(GuestID__in=gid).update(Attending=''.join(cd[field]))
+            return HttpResponseRedirect(reverse('guests:submitrsvp', args=(invid,)))
         else:
             next
     else:
@@ -69,9 +76,7 @@ def ChooseRSVP(request, SearchResult):
     return render(request, 'guests/rsvp.html', {'form': form, 'title': title})
 
 def SubmitRSVP(request, ChooseResult):    
-    title = 'RSVP'
-    form = RSVPForm()
-    return render(request, 'guests/rsvp.html', {'form': form, 'title': title})
+    return render(request, 'guests/rsvpthankyou.html')
 
 
 def registry(request):

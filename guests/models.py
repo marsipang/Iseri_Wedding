@@ -9,6 +9,7 @@ class Guest(models.Model):
     GuestID = models.IntegerField()
     UpdateBy = models.TextField(blank=True, null=True)
     PlusOne = models.BooleanField(blank=True)
+    PlusOneAttending = models.BooleanField(blank=True, null=True)
     PlusOneFirstName = models.TextField(blank=True, null=True)
     PlusOneLastName = models.TextField(blank=True, null=True)
     

@@ -1,0 +1,13 @@
+{% extends "guests/layout.html" %}
+{% load static %}
+{% block content %}
+    <div class="container">
+        <div class="divLeft">
+                <img src="{% static 'guests/images/WeddingPhotoFramed.png' %}">
+        </div>
+        <div class="divRight">                
+            <h1>{{ Thank You! }}</h1>
+            Your RSVP has successfully been submitted.
+        </div>
+    </div>
+{% endblock %}
