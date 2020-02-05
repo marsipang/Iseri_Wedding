@@ -120,6 +120,9 @@ def AddEmail(request, InvID):
     if request.method == 'POST':
         form = AddEmailForm(invid, request.POST)
         if form.is_valid():
+            cd = form.cleaned_data
+            emailrecord = Email(InvitationID=invid, Email=cd['Email'])
+            emailrecord.save()
             return HttpResponseRedirect(reverse('guests:submitrsvp', args=(InvID,)))
         else:
             next

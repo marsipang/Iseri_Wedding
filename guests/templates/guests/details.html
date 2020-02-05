@@ -1,11 +1,12 @@
 {% extends "guests/layout.html" %}
 {% load static %}
 {% block content %}
-    <div class="container">
-        <div class="divLeft">
-                <img src="{% static 'guests/images/LeaningSmileFramed.png' %}">
-        </div>
-        <div class="divRight">                
+<div class="page">
+    <div class="section divLeft">
+            <img src="{% static 'guests/images/LeaningSmileFramed.png' %}">
+    </div>
+    <div class="section divRight">   
+        <div class="textblock">             
             <h1>Details</h1>
             <p>
                 September 26th, 2020
@@ -27,6 +28,7 @@
                 <img id="instaicon" src="{% static 'guests/images/instagram-logo-transparent-allwhite.png' %}">
                 #instagramhashtag
             </p>
-        </div>>
+        </div>
     </div>
+</div>
 {% endblock %}

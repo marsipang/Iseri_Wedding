@@ -12,7 +12,7 @@ class GuestAdmin(admin.ModelAdmin):
     
 class WeddingPartyAdmin(admin.ModelAdmin):
     # ...
-    list_display = ('FirstName', 'LastName')
+    list_display = ('Title')
 
 class EmailAdmin(admin.ModelAdmin):
     list_display = ('InvitationID', 'Email')

@@ -1,27 +1,22 @@
 {% extends "guests/layout.html" %}
 {% load static %}
 {% block content %}
-    <div class="container">
+    <div class="page">
         <div class="singlecenter">
             <h1>Registry</h1>
             <p>We have registries at the following places. Please send any gifts to our home in Seattle since it will be difficult
                 for us to take it home with us from Hawai'i.
             </p>
-            <table class="regtable">
-                <tr>
-                    <td>
-                        <a href="https://www.amazon.com" target="_blank">
-                            <img class="regimg" src="{% static 'guests/images/amazon-logo-transparent-allwhite.png' %}">
-                        </a>
-                    </td>
-                    <td>
-                        <a href="https://www.crateandbarrel.com/" target="_blank">
-                            <img class="regimg" src="{% static 'guests/images/crate-barrel-logo-transparent-allwhite.png' %}">
-                        </a>
-                    </td>
-                </tr>
-            
-            </table>
+                <div class="reglink">
+                    <a href="https://www.amazon.com" target="_blank">
+                        <img class="regimg" src="{% static 'guests/images/amazon-logo-transparent-allwhite.png' %}">
+                    </a>
+                </div>
+                <div class="reglink">
+                    <a href="https://www.crateandbarrel.com/" target="_blank">
+                        <img class="regimg" src="{% static 'guests/images/crate-barrel-logo-transparent-allwhite.png' %}">
+                    </a>
+                </div>
         </div>
     </div>
 {% endblock %}

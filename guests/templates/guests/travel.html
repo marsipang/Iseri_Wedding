@@ -1,26 +1,28 @@
 {% extends "guests/layout.html" %}
 {% load static %}
 {% block content %}
-    <div class="container">
-        <div class="divLeft">
+    <div class="page">
+        <div class="section divLeft">
                 <img src="{% static 'guests/images/RoadWalkingFramed.png' %}">
         </div>
-        <div class="divRight">                
-            <h1>Travel</h1>
-            <img class="icon" src="{% static 'guests/images/house.png' %}">
-            <p>
-                Our wedding celebration takes place in Ko Olina, where there are several resort options.
-                There are also some Airbnb options within the community and nearby. There are also options 
-                in Waikiki, which is about a 40 minute drive away without traffic.
-            </p>
-            <img class="icon" src="{% static 'guests/images/car.png' %}">
-            <p>
-                The best way to get around Oahu is to rent a car. There are multiple rental car companies by
-                the airport and in Waikiki. Oahu has Lyft and Uber here as well. Most of it is
-                concentrated in Honolulu, so if you're visiting and are looking to do some sight seeing outside
-                of Honolulu, we do recommend not relying on that as a primary way of travel. But they the best
-                ways of getting to and from our venue if you're planning on drinking with us at our reception!
-            </p>
+        <div class="section divRight">   
+            <div class="textblock">             
+                <h1>Travel</h1>
+                <img class="icon" src="{% static 'guests/images/house.png' %}">
+                <p>
+                    Our wedding celebration takes place in Ko Olina, where there are several resort options.
+                    There are also some Airbnb options within the community and nearby. There are also options 
+                    in Waikiki, which is about a 40 minute drive away without traffic.
+                </p>
+                <img class="icon" src="{% static 'guests/images/car.png' %}">
+                <p>
+                    The best way to get around Oahu is to rent a car. There are multiple rental car companies by
+                    the airport and in Waikiki. Oahu has Lyft and Uber here as well. Most of it is
+                    concentrated in Honolulu, so if you're visiting and are looking to do some sight seeing outside
+                    of Honolulu, we do recommend not relying on that as a primary way of travel. But they are the best
+                    ways of getting to and from our venue if you're planning on drinking with us at our reception!
+                </p>
+            </div>
         </div>
     </div>
 {% endblock %}

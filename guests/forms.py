@@ -48,7 +48,7 @@ class RSVPForForm(forms.Form):
             pass 
     
 class AddEmailForm(forms.Form):
-    email = forms.EmailField(label='Email')
+    email = forms.EmailField(label='Email Address')
     invid = forms.CharField(widget=forms.HiddenInput())
     
     def __init__(self, InvitationID, *args, **kwargs):

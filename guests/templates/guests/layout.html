@@ -8,8 +8,10 @@
     <body>
         <header>
             <img class="logo" id="headerimg" src="{% static 'guests/images/Web Name Banner.png' %}"></img>
+            <span class="menulink" onclick="openNav()">Menu</span>
             <div class="navbar">
                 <ul>
+                    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
                     <li><a href="{% url 'guests:home' %}">Home</a></li>
                     <li><a href="{% url 'guests:details' %}">Details</a></li>
                     <li><a href="{% url 'guests:rsvp' %}">RSVP</a></li>
@@ -22,6 +24,7 @@
         {% block content %}
         {% endblock %}
         <script type="text/javascript" src="{% static 'js/jquery-3.4.1.min.js' %}"></script> 
+        <script type="text/javascript" src="{% static 'js/guests-jquery.js' %}"></script> 
         {% block javascript %}
         {% endblock %}
     </body>

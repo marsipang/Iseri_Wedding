@@ -1,7 +1,10 @@
-$('#form').submit(function(e){
-    $.post('/url/', $(this).serialize(), function(data){ ... 
-       $('.message').html(data.message);
-       // of course you can do something more fancy with your respone
-    });
-    e.preventDefault();
-});
+function openNav() {
+    $( ".navbar" ).css( "width", "250px" );
+    $( ".section" ).css( "z-index", "-1" );
+  }
+  
+  function closeNav() {
+    $( ".navbar" ).css( "width", "0" );
+    $( ".section" ).css( "z-index", "0" );
+    $( ".section" ).css( "transition", "0.5s" );
+  }

@@ -1,53 +1,59 @@
 {% extends "guests/layout.html" %}
 {% load static %}
 {% block content %}
-    <div class="container">
+    <div class="page">
         <div class="homecontainer">
             <img src="{% static 'guests/images/HoldingHandsFramed.png' %}">
         </div>
-    </div>
-
-    <div class="container">
-        <div class="divLeft" id="partyleft">
-            <h1> Bride Tribe </h1>
-            {% for person in Bride %}
-                <div class="partyblockcontainer">
-                    <div class="partyimgcontainer" id="imgclick:{{ person.FirstName }}" onclick="on(this.id)">
-                        <img class="weddingpartyimg" src="{% static 'guests/images/' %}{{ person.FirstName }}.jpg " >
-                        <div class="wedimgoverlay">
-                            <div class="partyimgtext"> 
-                                Click to learn more about me!
+        <div class="section divLeft">
+            <div class="textblock">
+                <h1> Bride Tribe </h1>
+                {% for person in Bride %}
+                    <div class="partyblockcontainer">
+                        <div class="partyimgcontainer" id="imgclick:{{ person.FirstName }}" onclick="on(this.id)">
+                            <img class="weddingpartyimg" src="{% static 'guests/images/' %}{{ person.FirstName }}.jpg " >
+                            <div class="wedimgoverlay">
+                                <div class="partyimgtext"> 
+                                    Click to learn more about me!
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    {{ person.FirstName }} {{ person.LastName }}
-                    <br>{{ person.Title }}
-                </div>
-            {% endfor %}
-        </div>
-        <div class="divRight">
-            <h1> Groom Platoon </h1>
-            {% for person in Groom %}
-                <div class="partyblockcontainer">
-                    <div class="partyimgcontainer" id="imgclick:{{ person.FirstName }}" onclick="on(this.id)">
-                        <img class="weddingpartyimg" src="{% static 'guests/images/' %}{{ person.FirstName }}.jpg " >
-                        <div class="wedimgoverlay">
-                            <div class="partyimgtext"> 
-                                Click to learn more about me!
-                            </div>
+                        <div class="nameblock">
+                            {{ person.FirstName }} {{ person.LastName }}
+                            <br>{{ person.Title }}
                         </div>
                     </div>
-                    {{ person.FirstName }} {{ person.LastName }}
-                    <br>{{ person.Title }}
-                </div>
-            {% endfor %}
+                {% endfor %}
+            </div>
         </div>
-    </div>
-    {% for person in Everybody %}
-    <div class="overlay" id="Overlay:{{ person.FirstName }}" onclick="off(this.id)">
-        <div id="overlaycontent">
-            <img class="pageoverlayimg" src="{% static 'guests/images/' %}{{ person.FirstName }}.jpg " >
-            <br>{{ person.About }}
+        <div class="section divRight">
+            <div class="textblock">
+                <h1> Groom Platoon </h1>
+                {% for person in Groom %}
+                    <div class="partyblockcontainer">
+                        <div class="partyimgcontainer" id="imgclick:{{ person.FirstName }}" onclick="on(this.id)">
+                            <img class="weddingpartyimg" src="{% static 'guests/images/' %}{{ person.FirstName }}.jpg " >
+                            <div class="wedimgoverlay">
+                                <div class="partyimgtext"> 
+                                    Click to learn more about me!
+                                </div>
+                            </div>
+                        </div>
+                        <div class="nameblock">
+                            {{ person.FirstName }} {{ person.LastName }}
+                            <br>{{ person.Title }}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    
+        {% for person in Everybody %}
+        <div class="overlay" id="Overlay:{{ person.FirstName }}" onclick="off(this.id)">
+            <div id="overlaycontent">
+                <img class="pageoverlayimg" src="{% static 'guests/images/' %}{{ person.FirstName }}.jpg " >
+                <br>{{ person.About }}
+            </div>
         </div>
     </div>
     {% endfor %}

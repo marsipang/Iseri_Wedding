@@ -21,6 +21,23 @@ header {
     max-height:300px;
     max-width:300px;
   }
+
+.menulink {
+    text-decoration: none;
+    color:#7294ad;
+    overflow: hidden;
+    cursor:pointer
+}
+.closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+    text-decoration: none;
+    color: #7294ad;
+  }
+
   .navbar {
     background-color: white;
     text-align:center;
@@ -31,10 +48,6 @@ header {
     padding: 0;
     overflow: hidden;
     display: inline-block;
-  }
-  
-  .navbar li {
-    float: left;
   }
   
   .navbar li a {
@@ -48,21 +61,25 @@ header {
   .navbar li a:hover {
     color: lightsteelblue;
   }
-  
+
 body {
-    color: white;
-    background-image: url('images/Website Background7.png');
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    font-family: Tw Cen MT Condensed;
-    text-transform: uppercase;
-    font-size: 14pt;
-    letter-spacing: 2px;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: white;
+  background-image: url('images/Website Background7.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  font-family: Tw Cen MT Condensed;
+  text-transform: uppercase;
+  font-size: 14pt;
+  letter-spacing: 2px;
+  
 }
 
 h1 {
@@ -70,8 +87,8 @@ h1 {
     font-size: 2em;
     margin-top: 0.67em;
     margin-bottom: 0.67em;
-    margin-left: 0;
-    margin-right: 0;
+    margin-left: 10px;
+    margin-right: 10px;
     font-weight: bold;
     border-bottom: 1px solid white;
   }
@@ -80,51 +97,33 @@ h1 {
     max-width: 100%;
     height: auto;
   }
-
-.container {
-    display: inline-flex;  
+  .page {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .section {
     width: 100%;
-}
+    display: flex;
+    text-align: center;
+    align-items: center;
+  }
 
 .singlecenter {
     width: 100%;
-    margin: auto 100px;
+    margin: 10px 10%;
     padding: 20px;
     text-align: center;
     align-items:center;
     background-color: #7294ad;
     opacity: .85;
     font-size: 16pt;
-}
-
-.divLeft {
-    width: 45%; 
-    height: auto; 
-    float:left; 
-    margin:auto 10px auto 30px;
-    padding:30px;
-    text-align: center;
-    align-items: center;
-    font-size: 18px;
-}
-
-.divRight {
-    width: 45%;
-    height: auto; 
-    float:right; 
-    margin:auto 30px auto 10px;
-    padding:30px;
-    background-color: #7294ad;
-    opacity: .9;
-    text-align: center;
-    align-items: center;    
-    font-size: 16pt;
+    z-index: -1;
 }
 
 .homecontainer {
     width: 100%;
-    margin: auto 100px;
-    padding: 20px;
+    margin: 10px 10%;
     text-align: center;
     align-items:center;
 }
@@ -137,22 +136,14 @@ h1 {
     height: 40px;
 }
 
-.regtable {
-    width: 100%;
-}
-
-.regtable td{
-    width:50%;
-}
-
 .regimg {
     width: 250px;
-    height: 250px;
+    height: auto;    
 }
 
 .partyblockcontainer {
-    width: 30%;
-    display: inline-block;
+    display: inline-flex;
+    flex-wrap: wrap;
     margin: 5px;
 }
 
@@ -160,6 +151,13 @@ h1 {
     position: relative;
     width: 100%;
     
+}
+
+.nameblock {
+    width: 100%;
+    margin: 0;
+    text-align: center;
+    align-items: center;
 }
 
 .weddingpartyimg {
@@ -233,8 +231,6 @@ h1 {
     opacity: .9;
 }
 
-
-
 ul.errorlist {
     margin: 0;
     padding: 0;
@@ -258,22 +254,18 @@ form p{
 
 form label{
     float: left;
-    width: 25%;
     text-align: left;
 }
 
 form input[type="text"]{
-    width: 73%;
     height: 20px;
 }
 
 form input[type="email"]{
-    width: 73%;
     height: 20px;
 }
 
 form input[type="checkbox"] {
-    width: 50%;
     height: 20px;
 }
 
@@ -290,6 +282,7 @@ form ul{
 }
 button {
     height:30px;
+    margin: 10px 0;
 }
 
 .rsvptable {
@@ -302,3 +295,187 @@ button {
 .rsvptable td{
     width:50%;
 }
+
+.textblock {
+    width: 100%;
+    margin: 0 10px;
+    padding: 10px;
+    text-align: center;
+    align-items: center;
+    background-color: #7294ad;
+    font-size: 18px;
+    opacity: .9;
+}
+
+
+/* Mobile Styles */
+@media only screen and (max-width: 430px) {
+    .menulink {
+        display: block;
+    }
+    .closebtn {
+        display: block;
+    }
+    .navbar{
+        height: 100%;
+        width: 0;
+        position: fixed;
+        z-index: 99;
+        top: 0;
+        left: 0;
+        background-color: #111;
+        overflow-x: hidden;
+        transition: 0.5s;
+        padding-top: 60px;
+    }
+    .navbar li {
+         float: none;
+    }
+    .reglink {
+        width: 100%;
+        height: 100px;
+        text-align: center;
+        align-items: center;
+        margin: 25px 0; 
+    }
+
+    .divLeft {
+        width: 100%; 
+        height: auto; 
+        margin:10px 2%;
+        
+    }
+
+    .divRight {
+        width: 100%;
+        height: auto;  
+        margin:10px 2%;
+        
+    }
+
+    .partyblockcontainer {
+        width: 40%;
+    }
+
+    form label{
+        width: 38%;
+    }
+    
+    form input[type="text"]{
+        width: 60%;
+    }
+    
+    form input[type="email"]{
+        width: 60%;
+    }
+    
+    form input[type="checkbox"] {
+        width: 40%;
+    }
+  }
+  
+  /* Tablet Styles */
+  @media only screen and (min-width: 431px) and (max-width: 960px) {
+    .menulink {
+        display: none;
+    }
+    .closebtn {
+        display: none;
+    }
+    .navbar{
+        display: block;
+    }
+    .navbar li {
+        float: left;
+      }
+    .reglink {
+      width: 50%;
+      float: left;
+      height: 100px;
+      align-items: center;  
+    }
+
+    .divLeft {
+        width: 45%; 
+        height: auto; 
+        margin: 10px 1% 10px 4%;
+    }
+
+    .divRight {
+        width: 45%;
+        height: auto; 
+        margin: 10px 4% 10px 1%;
+    }
+
+    .partyblockcontainer {
+        width: 30%;
+    }
+    form label{
+        width: 35%;
+    }
+    
+    form input[type="text"]{
+        width: 63%;
+    }
+    
+    form input[type="email"]{
+        width: 63%;
+    }
+    
+    form input[type="checkbox"] {
+        width: 50%;
+    }
+  }
+  
+  /* Desktop Styles */
+  @media only screen and (min-width: 961px) {
+    .menulink {
+        display: none;
+    }
+    .closebtn {
+        display: none;
+    }
+    .navbar{
+        display: block;
+    }
+    .navbar li {
+        float: left;
+      }
+    .reglink {
+      width: 50%;
+      float: left;
+      height: 100px;
+      align-items: center;  
+    }
+
+    .divLeft {
+        width: 45%; 
+        height: auto; 
+        margin: 10px 1% 10px 4%;
+    }
+
+    .divRight {
+        width: 45%;
+        height: auto; 
+        margin: 10px 4% 10px 1%;
+    }
+
+    .partyblockcontainer {
+        width: 30%;
+    }
+    form label{
+        width: 25%;
+    }
+    
+    form input[type="text"]{
+        width: 73%;
+    }
+    
+    form input[type="email"]{
+        width: 73%;
+    }
+    
+    form input[type="checkbox"] {
+        width: 50%;
+    }
+  }  
