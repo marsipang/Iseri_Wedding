@@ -1,10 +1,19 @@
 from django import forms
-from .models import Guest
+from .models import Guest, Email
 
 class SearchForm(forms.Form):
     FirstName = forms.CharField(label = 'First Name')
     LastName = forms.CharField(label = 'Last Name')
     Email = forms.EmailField(label = 'Email Address')
+    
+    def clean(self):
+        fname = self.cleaned_data.get('FirstName')
+        lname = self.cleaned_data.get('LastName')
+        
+        if Guest.objects.all().filter(FirstName__iexact=fname, LastName__iexact=lname).exists():
+            next
+        else:
+            raise forms.ValidationError('Your invitation could not be found. Please double check all fields and try again.')
 
 class DynamicMultipleChoiceField(forms.MultipleChoiceField): 
     def clean(self, value): 
@@ -25,15 +34,8 @@ class RSVPForForm(forms.Form):
                 self.fields['plusone'] = DynamicMultipleChoiceField(label='Plus One', 
                         choices=[(True, 'Yes'), (False, 'No')], widget=forms.CheckboxSelectMultiple())   
                 self.fields['PlusOneFirstName'] = forms.CharField(label = 'Plus One First Name', required=False)
-                self.fields['PlusOneLastName'] = forms.CharField(label = 'Plus One Last Name', required=False)
+                self.fields['PlusOneLastName'] = forms.CharField(label = 'Plus One Last Name', required=False) 
 
-                def get_fields(self, request, obj=None):
-                    if obj is None:
-                        next
-                    else:
-                        self.fields.append('status')   
-
-    
     def clean(self):
         try:
             plusone = self.cleaned_data.get('plusone')
@@ -43,14 +45,20 @@ class RSVPForForm(forms.Form):
                 self.add_error('plusonefname', msg)
                 self.add_error('plusonelname', msg)
         except:
-            pass
+            pass 
+    
+class AddEmailForm(forms.Form):
+    email = forms.EmailField(label='Email')
+    invid = forms.CharField(widget=forms.HiddenInput())
+    
+    def __init__(self, InvitationID, *args, **kwargs):
+        super(AddEmailForm, self).__init__(*args, **kwargs)
+        self.fields['invid'].initial = InvitationID
+    
+    def clean(self):
+        emailid = self.cleaned_data.get('email')
+        invitationid = self.cleaned_data.get('invid')
 
-
-
-        
-class RSVPForm(forms.Form):
-    rsvp = forms.ChoiceField(label='', choices=[(True, 'Yes'), (False, 'No')])
-    plusone = forms.BooleanField(label = 'Plus One Attending')
-    plusonefname = forms.CharField(label = 'Plus One First Name')
-    plusonelname = forms.CharField(label = 'Plus One Last Name')
-    email = forms.EmailField(label = 'Email')    
+            
+        if Email.objects.all().filter(Email__iexact=emailid, InvitationID=invitationid).exists():
+            self.add_error('email', forms.ValidationError("Email is already registered to the invitation"))

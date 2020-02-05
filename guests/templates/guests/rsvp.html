@@ -20,27 +20,6 @@
 
 {% block javascript %}
 <script type="text/javascript" >
-    $('#search').submit(function(e){
-        var fname = $("#id_FirstName").val();
-        var lname = $("#id_LastName").val();
-        $.ajax({
-            url: 'ajax/validate_guest/',
-            data: {
-                'fname': fname,
-                'lname': lname,
-            },
-            dataType: 'json',
-            success: function (data) {
-                console.log(data)
-                if (data.found) {
-                    console.log("invitation found");
-                } else {
-                    alert("Sorry! Your invitation could not be found. Please double check all fields and try again.");
-                }
-            }
-        });
-    });
-
     $().ready(function(){
         $("#id_PlusOneFirstName").hide();
         $('label[for="id_PlusOneFirstName"]').hide();
@@ -61,7 +40,5 @@
             $('label[for="id_PlusOneLastName"]').hide();
         }
     });
-
-
 </script>
 {% endblock %}

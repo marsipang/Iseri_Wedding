@@ -291,3 +291,14 @@ form ul{
 button {
     height:30px;
 }
+
+.rsvptable {
+    width: 100%;
+}
+
+.rsvptable thead td{
+    border-bottom: 1px solid;
+}
+.rsvptable td{
+    width:50%;
+}

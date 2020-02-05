@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
-from .forms import SearchForm, RSVPForForm, RSVPForm
+from .forms import SearchForm, RSVPForForm, AddEmailForm
 from .models import Guest, WeddingParty, Email
 from django.db.models.functions import Concat, Lower
 from django.db.models import Count, F, Value
@@ -18,6 +18,7 @@ def FindRSVP(request):
     title = 'Find Your Invitation'
     result = "No Post"
     form = SearchForm()
+    InvStatus = None
     if request.method == 'POST':
         form = SearchForm(request.POST)
         if form.is_valid():
@@ -26,14 +27,18 @@ def FindRSVP(request):
                 GuestObj = Guest.objects.get(LastName__iexact=cd['LastName'], 
                                            FirstName__iexact=cd['FirstName'])
                 result = GuestObj.InvitationID + '!' + str(GuestObj.GuestID)
-                emailrecord = Email(InvitationID=GuestObj.InvitationID, Email=cd['Email'])
-                emailrecord.save()
+                InvStatus = GuestObj.Attending
             except:
                 pass
-            if result != "No Post":
-                return HttpResponseRedirect(reverse('guests:choosersvp', args=(result,)))
+            if InvStatus == None:
+                if result != "No Post":
+                    emailrecord = Email(InvitationID=GuestObj.InvitationID, Email=cd['Email'])
+                    emailrecord.save()
+                    return HttpResponseRedirect(reverse('guests:choosersvp', args=(result,)))
+                else:
+                    next
             else:
-                next
+                return HttpResponseRedirect(reverse('guests:guestrsvp', args=(result,)))
     else:
         next
     return render(request, 'guests/rsvp.html', {'form': form, 'title': title})
@@ -56,7 +61,6 @@ def ChooseRSVP(request, SearchResult):
         if form.is_valid():
             cd = form.cleaned_data
             cdfields = cd.keys()
-            Result = []
             for field in cdfields:
                 if field == 'plusone':
                     Guest.objects.filter(GuestID__in=guestid).update(PlusOneAttending=''.join(cd[field]))
@@ -76,8 +80,50 @@ def ChooseRSVP(request, SearchResult):
     return render(request, 'guests/rsvp.html', {'form': form, 'title': title})
 
 def SubmitRSVP(request, ChooseResult):    
-    return render(request, 'guests/rsvpthankyou.html')
+    title = 'Thank You! Your RSVP has successfully been submitted'
+    invid = ChooseResult.split('!')[0]
+    guestid = ChooseResult.split('!')[1]
+    guests = [{'Name':f'{i.FirstName} {i.LastName}', 'Attending':'Yes' if i.Attending else 'No'} for i in Guest.objects.all().filter(InvitationID=invid)]
+    if Guest.objects.filter(InvitationID=invid, PlusOne=True).exists():
+        plusone = [{'Name':f'+1: {i.PlusOneFirstName} {i.PlusOneLastName}' if i.PlusOneAttending else f'+1: {i.FirstName} {i.LastName} Plus One', 'Attending': 'Yes' if i.PlusOneAttending else 'No'} for i in Guest.objects.all().filter(InvitationID=invid, PlusOne=True)]
+        guests = guests + plusone
+    emails = [{'Email':i.Email for i in Email.objects.all().filter(InvitationID=invid)}]
+    if request.method == 'POST' and 'Update' in request.POST:
+        return HttpResponseRedirect(reverse('guests:choosersvp', args=(ChooseResult,)))
+    elif request.method == 'POST' and 'AddEmail' in request.POST:
+        return HttpResponseRedirect(reverse('guests:addemail', args=(ChooseResult,)))
+    else:
+        next    
+    return render(request, 'guests/rsvpdetails.html', {'title':title, 'guests': guests, 'emails':emails})
 
+
+def GuestRSVP(request, InvID):
+    title = 'An RSVP FOR THIS INVITATION HAS ALREADY BEEN SUBMITTED'
+    invid = InvID.split('!')[0]
+    guests = [{'Name':f'{i.FirstName} {i.LastName}', 'Attending':'Yes' if i.Attending else 'No'} for i in Guest.objects.all().filter(InvitationID=invid)]
+    if Guest.objects.filter(InvitationID=invid, PlusOne=True).exists():
+        plusone = [{'Name':f'+1: {i.PlusOneFirstName} {i.PlusOneLastName}' if i.PlusOneAttending else f'+1: {i.FirstName} {i.LastName} Plus One', 'Attending': 'Yes' if i.PlusOneAttending else 'No'} for i in Guest.objects.all().filter(InvitationID=invid, PlusOne=True)]
+        guests = guests + plusone
+    emails = [{'Email':i.Email for i in Email.objects.all().filter(InvitationID=invid)}]
+    if request.method == 'POST' and 'Update' in request.POST:
+        return HttpResponseRedirect(reverse('guests:choosersvp', args=(InvID,)))
+    elif request.method == 'POST' and 'AddEmail' in request.POST:
+        return HttpResponseRedirect(reverse('guests:addemail', args=(InvID,)))
+    else:
+        next
+    return render(request, 'guests/rsvpdetails.html', {'title':title, 'guests': guests, 'emails':emails})
+
+def AddEmail(request, InvID):
+    title = 'Add an Email'
+    invid = InvID.split('!')[0]
+    form = AddEmailForm(invid)
+    if request.method == 'POST':
+        form = AddEmailForm(invid, request.POST)
+        if form.is_valid():
+            return HttpResponseRedirect(reverse('guests:submitrsvp', args=(InvID,)))
+        else:
+            next
+    return render(request, 'guests/rsvp.html', {'form': form, 'title': title})
 
 def registry(request):
     return render(request, 'guests/registry.html')

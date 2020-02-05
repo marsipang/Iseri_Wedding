@@ -1,0 +1,39 @@
+{% extends "guests/layout.html" %}
+{% load static %}
+{% block content %}
+    <div class="container">
+        <div class="divLeft">
+                <img src="{% static 'guests/images/WeddingPhotoFramed.png' %}">
+        </div>
+        <div class="divRight">                
+            <h1>{{ title }}</h1>
+            <table class="rsvptable">
+                <thead>
+                    <tr>
+                        <td>Name</td> 
+                        <td>Attending</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for guest in guests %}
+                        <tr>
+                            <td>{{ guest.Name }}</td> 
+                            <td>{{ guest.Attending }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <p>Any communication about the wedding for the above people will be sent to
+                <br>
+                {% for email in emails %}
+                    <br>{{ email.Email }}
+                {% endfor %}
+            </p>
+            <form method="post" action="">
+                {% csrf_token %}
+                <button type="submit" class="button" name="Update" >Update RSVP Information</button>
+                <button type="submit" class="button" name="AddEmail">Add an Email Address</button>
+            </form>
+        </div>>
+    </div>
+{% endblock %}
