@@ -4,6 +4,7 @@ from .forms import SearchForm, RSVPForForm, AddEmailForm
 from .models import Guest, WeddingParty, Email
 from django.urls import reverse
 from django.core.mail import send_mail
+from django_pandas.managers import read_frame
 
 # Create your views here.
 def home(request):
@@ -70,14 +71,18 @@ def ChooseRSVP(request, SearchResult):
                 else:
                     gid = field.replace('rsvp_', '')
                     Guest.objects.filter(GuestID__in=gid).update(Attending=''.join(cd[field]))
+            recepients = [i.Email for i in Email.objects.filter(InvitationID=invid)]
+            guestobj = Guest.objects.get(GuestID=guestid)
+            guestname = f'{guestobj.FirstName} {guestobj.LastName}'
             send_mail(
-                'Test Django Email',
-                'Here is the message.',
+                'RSVP submitted',
+                f'''An RSVP to our wedding has been submitted by {guestname}. Thank you! You can review and/or update your rsvp on our website at anytime in the RSVP section.\n\nThe Iseris''',
                 'marsipang@gmail.com',
+#                [recepients],
                 ['pangie490@gmail.com'],
-                fail_silently=False,
+                fail_silently=False
             )
-            return HttpResponseRedirect(reverse('guests:submitrsvp', args=(invid,)))
+            return HttpResponseRedirect(reverse('guests:submitrsvp', args=(SearchResult,)))
         else:
             next
     else:
@@ -91,7 +96,7 @@ def SubmitRSVP(request, ChooseResult):
     if Guest.objects.filter(InvitationID=invid, PlusOne=True).exists():
         plusone = [{'Name':f'+1: {i.PlusOneFirstName} {i.PlusOneLastName}' if i.PlusOneAttending else f'+1: {i.FirstName} {i.LastName} Plus One', 'Attending': 'Yes' if i.PlusOneAttending else 'No'} for i in Guest.objects.all().filter(InvitationID=invid, PlusOne=True)]
         guests = guests + plusone
-    emails = [{'Email':i.Email for i in Email.objects.all().filter(InvitationID=invid)}]
+    emails = [{'Email':i.Email} for i in Email.objects.all().filter(InvitationID=invid)]
     if request.method == 'POST' and 'Update' in request.POST:
         return HttpResponseRedirect(reverse('guests:choosersvp', args=(ChooseResult,)))
     elif request.method == 'POST' and 'AddEmail' in request.POST:
@@ -108,7 +113,7 @@ def GuestRSVP(request, InvID):
     if Guest.objects.filter(InvitationID=invid, PlusOne=True).exists():
         plusone = [{'Name':f'+1: {i.PlusOneFirstName} {i.PlusOneLastName}' if i.PlusOneAttending else f'+1: {i.FirstName} {i.LastName} Plus One', 'Attending': 'Yes' if i.PlusOneAttending else 'No'} for i in Guest.objects.all().filter(InvitationID=invid, PlusOne=True)]
         guests = guests + plusone
-    emails = [{'Email':i.Email for i in Email.objects.all().filter(InvitationID=invid)}]
+    emails = [{'Email':i.Email} for i in Email.objects.all().filter(InvitationID=invid)]
     if request.method == 'POST' and 'Update' in request.POST:
         return HttpResponseRedirect(reverse('guests:choosersvp', args=(InvID,)))
     elif request.method == 'POST' and 'AddEmail' in request.POST:
@@ -120,6 +125,7 @@ def GuestRSVP(request, InvID):
 def AddEmail(request, InvID):
     title = 'Add an Email'
     invid = InvID.split('!')[0]
+    guestid = InvID.split('!')[1]
     form = AddEmailForm(invid)
     if request.method == 'POST':
         form = AddEmailForm(invid, request.POST)
@@ -127,10 +133,13 @@ def AddEmail(request, InvID):
             cd = form.cleaned_data
             emailrecord = Email(InvitationID=invid, Email=cd['email'])
             emailrecord.save()
+            guestobj = Guest.objects.get(GuestID=guestid)
+            guestname = f'{guestobj.FirstName} {guestobj.LastName}'
             send_mail(
-                'Test Django Email',
-                'Here is the message.',
+                'Email Added to Invitation',
+                f'''The email {cd['email']} was successfully added by {guestname} to receive emails about the Iseri Wedding. If there are any updates made to the rsvp for your invitation or any notices about the wedding, this email will receive an email about it. If you'd like to review and/or update your RSVP submission, you can do so at anytime on our website in the RSVP section.\n\nThank you!\nThe Iseris''',
                 'marsipang@gmail.com',
+#                [cd['email']],
                 ['pangie490@gmail.com'],
                 fail_silently=False,
             )
