@@ -1,11 +1,9 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.http import HttpResponseRedirect, JsonResponse
 from .forms import SearchForm, RSVPForForm, AddEmailForm
 from .models import Guest, WeddingParty, Email
-from django.db.models.functions import Concat, Lower
-from django.db.models import Count, F, Value
 from django.urls import reverse
-import re
+from django.core.mail import send_mail
 
 # Create your views here.
 def home(request):
@@ -82,7 +80,6 @@ def ChooseRSVP(request, SearchResult):
 def SubmitRSVP(request, ChooseResult):    
     title = 'Thank You! Your RSVP has successfully been submitted'
     invid = ChooseResult.split('!')[0]
-    guestid = ChooseResult.split('!')[1]
     guests = [{'Name':f'{i.FirstName} {i.LastName}', 'Attending':'Yes' if i.Attending else 'No'} for i in Guest.objects.all().filter(InvitationID=invid)]
     if Guest.objects.filter(InvitationID=invid, PlusOne=True).exists():
         plusone = [{'Name':f'+1: {i.PlusOneFirstName} {i.PlusOneLastName}' if i.PlusOneAttending else f'+1: {i.FirstName} {i.LastName} Plus One', 'Attending': 'Yes' if i.PlusOneAttending else 'No'} for i in Guest.objects.all().filter(InvitationID=invid, PlusOne=True)]
@@ -123,6 +120,13 @@ def AddEmail(request, InvID):
             cd = form.cleaned_data
             emailrecord = Email(InvitationID=invid, Email=cd['Email'])
             emailrecord.save()
+            send_mail(
+                'Test Django Email',
+                'Here is the message.',
+                'from@example.com',
+                ['pangie490@example.com'],
+                fail_silently=False,
+            )
             return HttpResponseRedirect(reverse('guests:submitrsvp', args=(InvID,)))
         else:
             next
