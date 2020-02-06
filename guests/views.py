@@ -79,7 +79,7 @@ def ChooseRSVP(request, SearchResult):
                 f'''An RSVP to our wedding has been submitted by {guestname}. Thank you! You can review and/or update your rsvp on our website at anytime in the RSVP section.\n\nThe Iseris''',
                 'marsipang@gmail.com',
 #                [recepients],
-                ['pangie490@gmail.com'],
+                ['pangie490@gmail.com', 'Iseriwedding@gmail.com'],
                 fail_silently=False
             )
             return HttpResponseRedirect(reverse('guests:submitrsvp', args=(SearchResult,)))
@@ -140,7 +140,7 @@ def AddEmail(request, InvID):
                 f'''The email {cd['email']} was successfully added by {guestname} to receive emails about the Iseri Wedding. If there are any updates made to the rsvp for your invitation or any notices about the wedding, this email will receive an email about it. If you'd like to review and/or update your RSVP submission, you can do so at anytime on our website in the RSVP section.\n\nThank you!\nThe Iseris''',
                 'marsipang@gmail.com',
 #                [cd['email']],
-                ['pangie490@gmail.com'],
+                ['pangie490@gmail.com', 'Iseriwedding@gmail.com'],
                 fail_silently=False,
             )
             return HttpResponseRedirect(reverse('guests:submitrsvp', args=(InvID,)))
