@@ -21,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '%y)!epl-&7)5-kjo+asu$i_mu-bv*pm0v-bcl&vx3wtst=r7sm'
+SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -137,3 +137,12 @@ django_heroku.settings(locals())
 #X_FRAME_OPTIONS = 'ALLOW-FROM https://material.io/resources/resizer/'
 #X_FRAME_OPTIONS = 'ALLOW-FROM https://screenfly.org/'
 X_FRAME_OPTIONS = 'ALLOW-FROM http://www.responsinator.com/'
+
+
+#Email Settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = os.environ['EMAIL_USER']
+EMAIL_HOST_PASSWORD = os.environ['EMAIL_PW']

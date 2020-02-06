@@ -70,6 +70,13 @@ def ChooseRSVP(request, SearchResult):
                 else:
                     gid = field.replace('rsvp_', '')
                     Guest.objects.filter(GuestID__in=gid).update(Attending=''.join(cd[field]))
+            send_mail(
+                'Test Django Email',
+                'Here is the message.',
+                'marsipang@gmail.com',
+                ['pangie490@gmail.com'],
+                fail_silently=False,
+            )
             return HttpResponseRedirect(reverse('guests:submitrsvp', args=(invid,)))
         else:
             next
@@ -118,13 +125,13 @@ def AddEmail(request, InvID):
         form = AddEmailForm(invid, request.POST)
         if form.is_valid():
             cd = form.cleaned_data
-            emailrecord = Email(InvitationID=invid, Email=cd['Email'])
+            emailrecord = Email(InvitationID=invid, Email=cd['email'])
             emailrecord.save()
             send_mail(
                 'Test Django Email',
                 'Here is the message.',
-                'from@example.com',
-                ['pangie490@example.com'],
+                'marsipang@gmail.com',
+                ['pangie490@gmail.com'],
                 fail_silently=False,
             )
             return HttpResponseRedirect(reverse('guests:submitrsvp', args=(InvID,)))
