@@ -308,8 +308,8 @@ button {
 }
 
 
-/* Mobile Styles */
-@media only screen and (max-width: 430px) {
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
     .menulink {
         display: block;
     }
@@ -374,8 +374,7 @@ button {
     }
   }
   
-  /* Tablet Styles */
-  @media only screen and (min-width: 431px) and (max-width: 960px) {
+@media only screen and (min-width: 601px) {
     .menulink {
         display: none;
     }
@@ -388,94 +387,103 @@ button {
     .navbar li {
         float: left;
       }
-    .reglink {
-      width: 50%;
-      float: left;
-      height: 100px;
-      align-items: center;  
-    }
-
-    .divLeft {
-        width: 45%; 
-        height: auto; 
-        margin: 10px 1% 10px 4%;
-    }
-
-    .divRight {
-        width: 45%;
-        height: auto; 
-        margin: 10px 4% 10px 1%;
-    }
-
+      .reglink {
+        width: 50%;
+        float: left;
+        height: 100px;
+        align-items: center;  
+      }
+  
+      .divLeft {
+          width: 45%; 
+          height: auto; 
+          margin: 10px 1% 10px 4%;
+      }
+  
+      .divRight {
+          width: 45%;
+          height: auto; 
+          margin: 10px 4% 10px 1%;
+      }
     .partyblockcontainer {
         width: 30%;
     }
+
+  
+}
+
+  /* Small devices (portrait tablets and large phones, 600px and up) */
+  @media only screen and (min-width: 601px) and (max-width: 768px) {
     form label{
-        width: 35%;
+        width: 44.75%;
     }
     
     form input[type="text"]{
-        width: 63%;
+        width: 53%;
     }
     
     form input[type="email"]{
-        width: 63%;
+        width: 53%;
+    }
+    
+    form input[type="checkbox"] {
+        width: 25%;
+    }
+  }
+
+  /* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 769px) and (max-width: 992px) {
+    form label{
+        width: 40%
+    }
+    
+    form input[type="text"]{
+        width: 55%;
+    }
+    
+    form input[type="email"]{
+        width: 55%;
     }
     
     form input[type="checkbox"] {
         width: 50%;
     }
-  }
-  
-  /* Desktop Styles */
-  @media only screen and (min-width: 961px) {
-    .menulink {
-        display: none;
-    }
-    .closebtn {
-        display: none;
-    }
-    .navbar{
-        display: block;
-    }
-    .navbar li {
-        float: left;
-      }
-    .reglink {
-      width: 50%;
-      float: left;
-      height: 100px;
-      align-items: center;  
-    }
+}
 
-    .divLeft {
-        width: 45%; 
-        height: auto; 
-        margin: 10px 1% 10px 4%;
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 993px) and (max-width: 1200px) {
+    form label{
+        width: 40%;
     }
+    
+    form input[type="text"]{
+        width: 57%;
+    }
+    
+    form input[type="email"]{
+        width: 57%;
+    }
+    
+    form input[type="checkbox"] {
+        width: 50%;
+    }
+}
 
-    .divRight {
-        width: 45%;
-        height: auto; 
-        margin: 10px 4% 10px 1%;
-    }
-
-    .partyblockcontainer {
-        width: 30%;
-    }
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1201px) {
     form label{
         width: 25%;
     }
     
     form input[type="text"]{
-        width: 73%;
+        width: 67%;
     }
     
     form input[type="email"]{
-        width: 73%;
+        width: 67%;
     }
     
     form input[type="checkbox"] {
         width: 50%;
     }
-  }  
+}
