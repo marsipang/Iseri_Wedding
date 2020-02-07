@@ -77,7 +77,6 @@ body {
   background-size: cover;
   font-family: Tw Cen MT Condensed;
   text-transform: uppercase;
-  font-size: 14pt;
   letter-spacing: 2px;
   
 }
@@ -117,7 +116,6 @@ h1 {
     align-items:center;
     background-color: #7294ad;
     opacity: .85;
-    font-size: 16pt;
     z-index: -1;
 }
 
@@ -187,7 +185,6 @@ h1 {
 
   .partyimgtext {
     color: white;
-    font-size: 18px;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -219,7 +216,6 @@ h1 {
     position: absolute;
     top: 50%;
     left: 50%;
-    font-size: 24px;
     color: white;
     transform: translate(-50%,-50%);
     -ms-transform: translate(-50%,-50%);
@@ -309,6 +305,9 @@ button {
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
+    body {
+        font-size: 12pt;        
+      }
     .menulink {
         display: block;
     }
@@ -340,6 +339,9 @@ button {
     .textblock {
         font-size: 14px;
     }
+    .singlecenter {
+        font-size: 14pt;
+    }
     .divLeft {
         width: 100%; 
         height: auto; 
@@ -353,11 +355,15 @@ button {
         margin:10px 2%;
         
     }
-
+    .partyimgtext {
+        font-size: 12px;
+      }
     .partyblockcontainer {
         width: 40%;
     }
-
+    #overlaycontent{
+        font-size: 16px;
+      }
     form label{
         width: 38%;
     }
@@ -415,9 +421,21 @@ button {
 
   /* Small devices (portrait tablets and large phones, 600px and up) */
   @media only screen and (min-width: 601px) and (max-width: 768px) {
+    body {
+        font-size: 12pt;        
+      }
     .textblock {
         font-size: 14px;
     }
+    .singlecenter {
+        font-size: 14pt;
+    }
+    .partyimgtext {
+        font-size: 12px;
+      }
+      #overlaycontent{
+        font-size: 16px;
+      }
     form label{
         width: 44.75%;
     }
@@ -437,9 +455,21 @@ button {
 
   /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 769px) and (max-width: 992px) {
+    body {
+        font-size: 14pt;        
+      }
     .textblock {
         font-size: 18px;
     }
+    .singlecenter {
+        font-size: 16pt;
+    }
+    .partyimgtext {
+        font-size: 14px;
+      }
+      #overlaycontent{
+        font-size: 20px;
+      }
     form label{
         width: 40%
     }
@@ -459,9 +489,21 @@ button {
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 993px) and (max-width: 1200px) {
+    body {
+        font-size: 14pt;        
+      }
     .textblock {
         font-size: 18px;
     }
+    .singlecenter {
+        font-size: 16pt;
+    }
+    .partyimgtext {
+        font-size: 16px;
+      }
+      #overlaycontent{
+        font-size: 22px;
+      }
     form label{
         width: 40%;
     }
@@ -481,9 +523,22 @@ button {
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1201px) {
+    body {
+        font-size: 14pt;        
+      }
     .textblock {
         font-size: 18px;
     }
+    .singlecenter {
+        font-size: 16pt;
+    }
+    .partyimgtext {
+        font-size: 18px;
+      }
+      #overlaycontent{
+        font-size: 24px;
+      }
+      
     form label{
         width: 25%;
     }
