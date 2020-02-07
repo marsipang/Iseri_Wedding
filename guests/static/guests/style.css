@@ -303,7 +303,6 @@ button {
     text-align: center;
     align-items: center;
     background-color: #7294ad;
-    font-size: 18px;
     opacity: .9;
 }
 
@@ -338,7 +337,9 @@ button {
         align-items: center;
         margin: 25px 0; 
     }
-
+    .textblock {
+        font-size: 14px;
+    }
     .divLeft {
         width: 100%; 
         height: auto; 
@@ -414,6 +415,9 @@ button {
 
   /* Small devices (portrait tablets and large phones, 600px and up) */
   @media only screen and (min-width: 601px) and (max-width: 768px) {
+    .textblock {
+        font-size: 14px;
+    }
     form label{
         width: 44.75%;
     }
@@ -433,6 +437,9 @@ button {
 
   /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 769px) and (max-width: 992px) {
+    .textblock {
+        font-size: 18px;
+    }
     form label{
         width: 40%
     }
@@ -452,6 +459,9 @@ button {
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 993px) and (max-width: 1200px) {
+    .textblock {
+        font-size: 18px;
+    }
     form label{
         width: 40%;
     }
@@ -471,6 +481,9 @@ button {
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1201px) {
+    .textblock {
+        font-size: 18px;
+    }
     form label{
         width: 25%;
     }
