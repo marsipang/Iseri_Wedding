@@ -1,20 +1,13 @@
 from django.db import models
 from django.db.models import Max
 
-def get_new_default():
-    if Guest.objects.all().count() == 0:
-        new_order_default = 1
-    else:
-        new_order_default = Guest.objects.all().aggregate(Max('GuestID'))['GuestID__max']+1
-    return new_order_default
-
 # Create your models here.
 class Guest(models.Model):
+    GuestID = models.IntegerField(primary_key=True, unique=True)
     FirstName = models.TextField()
     LastName = models.TextField()
     Attending = models.BooleanField(blank=True, null=True)
     InvitationID = models.TextField()
-    GuestID = models.IntegerField(default = get_new_default, unique=True)
     UpdateBy = models.TextField(blank=True, null=True)
     PlusOne = models.BooleanField(blank=True)
     PlusOneAttending = models.BooleanField(blank=True, null=True)
